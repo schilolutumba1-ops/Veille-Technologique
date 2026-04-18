@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille Technologique — L'IA générative en entreprise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-soft: #161c24;
+    --surface: #1c232d;
+    --surface-2: #222a35;
+    --border: #2a333f;
+    --text: #e6ebf2;
+    --text-dim: #9aa5b5;
+    --text-mute: #6b7683;
+    --accent: #7dd3c0;
+    --accent-warm: #f4a261;
+    --accent-red: #e76f51;
+    --accent-blue: #8ab4f8;
+    --grid-line: rgba(125, 211, 192, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(125, 211, 192, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(244, 162, 97, 0.04) 0%, transparent 40%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    position: relative;
+    padding: 48px 0 56px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tag-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag-row span::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .tag-row span:not(:first-child)::before {
+    background: var(--text-mute);
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  h1.title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+
+  .meta-bar div span {
+    display: block;
+    color: var(--text);
+    margin-top: 4px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 72px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.9rem;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  p { margin-bottom: 16px; color: var(--text-dim); }
+  p strong { color: var(--text); font-weight: 600; }
+
+  /* PROBLEMATIQUE CARD */
+  .problem-card {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .problem-card::before {
+    content: "?";
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 4rem;
+    font-style: italic;
+    color: var(--accent);
+    opacity: 0.15;
+    line-height: 1;
+  }
+
+  .problem-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .problem-card p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* ARROW CALLOUT */
+  .arrow-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 22px;
+    background: rgba(125, 211, 192, 0.06);
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+
+  .arrow-callout::before {
+    content: "→";
+    color: var(--accent);
+    font-size: 1.3rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .arrow-callout p {
+    margin: 0;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* LISTS */
+  ul.clean-list {
+    list-style: none;
+    margin: 16px 0 24px;
+    padding: 0;
+  }
+
+  ul.clean-list li {
+    position: relative;
+    padding: 10px 0 10px 28px;
+    color: var(--text-dim);
+    border-bottom: 1px dashed var(--border);
+  }
+
+  ul.clean-list li:last-child { border-bottom: none; }
+
+  ul.clean-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 14px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* TABLES */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 560px;
+  }
+
+  thead {
+    background: var(--surface-2);
+  }
+
+  th {
+    text-align: left;
+    padding: 14px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: rgba(125, 211, 192, 0.03); }
+
+  td strong { color: var(--text); font-weight: 600; }
+
+  .src-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(138, 180, 248, 0.12);
+    color: var(--accent-blue);
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    margin: 2px 4px 2px 0;
+  }
+
+  /* SOURCES */
+  .source-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .source-card:hover {
+    border-color: var(--accent);
+    transform: translateX(2px);
+  }
+
+  .source-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .source-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .source-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+
+  .source-card .avis {
+    margin-top: 16px;
+    padding: 16px 18px;
+    background: var(--bg-soft);
+    border-left: 2px solid var(--accent-warm);
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .source-card .avis strong {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: linear-gradient(135deg, rgba(125, 211, 192, 0.08) 0%, rgba(138, 180, 248, 0.04) 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 40px 36px;
+    margin-top: 48px;
+  }
+
+  .conclusion h2 { margin-bottom: 20px; }
+
+  .conclusion p.pull {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.05em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header, section {
+    animation: fadeUp 0.6s ease backwards;
+  }
+
+  section:nth-child(2) { animation-delay: 0.08s; }
+  section:nth-child(3) { animation-delay: 0.16s; }
+  section:nth-child(4) { animation-delay: 0.24s; }
+  section:nth-child(5) { animation-delay: 0.32s; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .wrap { padding: 40px 20px 60px; }
+    .header { padding: 32px 0 40px; margin-bottom: 48px; }
+    .meta-bar { gap: 20px; }
+    .problem-card { padding: 24px; }
+    .problem-card p { font-size: 1.1rem; }
+    .source-card { padding: 22px; }
+    .conclusion { padding: 28px 22px; }
+    section { margin-bottom: 56px; }
+    h2 { font-size: 1.55rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="tag-row">
+      <span>BTS SIO — SISR</span>
+      <span>Veille Technologique</span>
+      <span>2024 / 2025</span>
+    </div>
+
+    <h1 class="title">L'IA générative en entreprise :<br><em>utile, mais risquée ?</em></h1>
+
+    <p class="lede">
+      Une veille technologique sur l'intégration des outils d'IA générative dans les environnements
+      professionnels, entre gains de productivité et enjeux de sécurité des données.
+    </p>
+
+    <div class="meta-bar">
+      <div>Contexte<span>Alternance — Caisse des Dépôts</span></div>
+      <div>Domaine<span>Cybersécurité / SI</span></div>
+      <div>Période<span>2024 — 2026</span></div>
+    </div>
+  </header>
+
+  <!-- PROBLEMATIQUE -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <h2>Problématique</h2>
+    </div>
+
+    <div class="problem-card">
+      <div class="label">Question centrale</div>
+      <p>Est-ce que l'IA générative peut vraiment aider les équipes IT sans mettre en danger les données de l'entreprise ?</p>
+    </div>
+
+    <h3>Pourquoi ce sujet ?</h3>
+    <p>
+      Depuis 2022, des outils comme ChatGPT ou Copilot sont de plus en plus utilisés en entreprise.
+      Pendant mon alternance à la Caisse des Dépôts, j'ai vu qu'un outil interne (<strong>Archi+</strong>)
+      avait été mis en place pour utiliser l'IA sans envoyer de données à l'extérieur.
+    </p>
+
+    <div class="arrow-callout">
+      <p>Comment profiter de l'IA sans prendre de risques ?</p>
+    </div>
+  </section>
+
+  <!-- APPORTS ET RISQUES -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <h2>Apports & risques</h2>
+    </div>
+
+    <h3>Ce que l'IA apporte</h3>
+    <p>
+      L'IA peut vraiment aider au quotidien. Ces usages sont largement documentés et discutés sur
+      Hacker News et Reddit (r/sysadmin), où les praticiens partagent leurs retours concrets :
+    </p>
+
+    <ul class="clean-list">
+      <li>Écrire du code plus rapidement</li>
+      <li>Comprendre des erreurs</li>
+      <li>Analyser des logs</li>
+      <li>Répondre à des demandes simples (support)</li>
+      <li>Retrouver des infos internes facilement</li>
+    </ul>
+
+    <div class="arrow-callout">
+      <p>Résultat : on gagne du temps et on est plus efficace.</p>
+    </div>
+
+    <h3 style="margin-top:40px;">Les risques</h3>
+    <p>
+      Ces dangers ont été identifiés via ma veille sur r/netsec, les alertes ANSSI et les flux
+      Feedly sur la cybersécurité.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Risque</th>
+            <th>Description</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fuite de données</strong></td>
+            <td>Envoyer des infos sensibles sans s'en rendre compte</td>
+            <td><span class="src-tag">ANSSI</span><span class="src-tag">CNIL</span></td>
+          </tr>
+          <tr>
+            <td><strong>Shadow AI</strong></td>
+            <td>Utiliser des outils non autorisés par la DSI</td>
+            <td><span class="src-tag">r/netsec</span><span class="src-tag">Feedly</span></td>
+          </tr>
+          <tr>
+            <td><strong>Prompt injection</strong></td>
+            <td>Manipuler une IA pour lui faire exécuter des actions dangereuses</td>
+            <td><span class="src-tag">Hacker News</span><span class="src-tag">r/netsec</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ANALYSE -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <h2>Mon analyse</h2>
+    </div>
+
+    <p>On entend souvent deux discours opposés :</p>
+    <ul class="clean-list">
+      <li>soit l'IA est incroyable</li>
+      <li>soit c'est dangereux</li>
+    </ul>
+
+    <div class="arrow-callout">
+      <p>En réalité, c'est entre les deux.</p>
+    </div>
+
+    <p>
+      Ce que j'ai vu en entreprise, c'est qu'on peut utiliser l'IA de façon sécurisée, à condition de
+      <strong>garder le contrôle des données</strong> et <strong>d'encadrer les usages</strong>.
+    </p>
+
+    <p>
+      Les recommandations de l'ANSSI et de la CNIL vont exactement dans ce sens : ne pas interdire
+      l'IA, mais encadrer strictement son usage, surtout quand des données sensibles sont en jeu.
+    </p>
+
+    <div class="arrow-callout">
+      <p>Pour moi, le rôle d'un technicien SISR, c'est justement de trouver cet équilibre.</p>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">04</div>
+      <h2>Analyse des sources</h2>
+    </div>
+
+    <!-- ANSSI -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">ANSSI</div>
+        <div class="source-url">cert.ssi.gouv.fr</div>
+      </div>
+      <p>
+        L'ANSSI a publié en février 2026 un rapport officiel sur l'état de la menace liée à l'IA
+        générative. Ce document confirme que des groupes d'attaquants étatiques (comme Lazarus, lié à
+        la Corée du Nord) utilisent déjà l'IA pour créer de faux profils, générer des malwares et
+        améliorer leurs campagnes de phishing. L'agence recense plus de 40 modes opératoires d'attaque
+        ayant utilisé l'IA entre 2023 et 2024.
+      </p>
+      <p>
+        L'ANSSI déconseille formellement d'utiliser des outils comme ChatGPT ou Copilot pour traiter
+        des données sensibles, et recommande un cloisonnement strict entre le système d'IA et le
+        reste du SI.
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        C'est la source la plus solide et la plus fiable de ma veille. Une agence gouvernementale
+        française dont les rapports reposent sur des observations réelles d'incidents. Ce qu'elle dit
+        sur le Shadow AI et la fuite de données rejoint directement ce que j'ai observé à la CDC, où
+        Archi+ a justement été conçu pour éviter ces risques.
+      </div>
+    </div>
+
+    <!-- CNIL -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">CNIL</div>
+        <div class="source-url">cnil.fr</div>
+      </div>
+      <p>
+        La CNIL a publié plusieurs séries de recommandations entre 2024 et 2025 sur l'application du
+        RGPD à l'IA générative. Le message central : quand une IA traite des données personnelles
+        (ce qui est presque toujours le cas avec un LLM), le RGPD s'applique. Envoyer un prompt
+        contenant des données clients à un service en ligne, c'est comme les déposer sur un serveur
+        qui ne vous appartient pas.
+      </p>
+      <p>
+        La CNIL pointe aussi des risques techniques précis : empoisonnement des données
+        d'entraînement, extraction de données via le modèle, et injection de prompts malveillants.
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        La CNIL apporte le cadre légal que l'ANSSI n'aborde pas. C'est complémentaire. Ce que je
+        retiens surtout : beaucoup d'entreprises utilisent l'IA sans avoir vérifié leur conformité
+        RGPD. Pour un technicien SISR, comprendre ces obligations, c'est aussi faire partie de la
+        solution.
+      </div>
+    </div>
+
+    <!-- REDDIT -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">Reddit — r/netsec & r/sysadmin</div>
+        <div class="source-url">reddit.com</div>
+      </div>
+      <p>
+        Ces deux communautés sont très actives et donnent accès à des retours d'expérience concrets
+        que la presse spécialisée ne couvre pas forcément. Sur r/netsec, les discussions sur le
+        Shadow AI et la prompt injection sont fréquentes, avec des exemples réels de situations
+        rencontrées par des admins et des pentesters.
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        Reddit est utile pour comprendre ce qui se passe vraiment sur le terrain, pas juste dans les
+        rapports officiels. La limite : les informations ne sont pas vérifiées, il faut croiser avec
+        des sources plus sérieuses comme l'ANSSI. Je l'utilise surtout comme signal d'alerte, pas
+        comme référence finale.
+      </div>
+    </div>
+
+    <!-- FEEDLY -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">Feedly — agrégateur RSS</div>
+        <div class="source-url">feedly.com</div>
+      </div>
+      <p>
+        Feedly me permet de centraliser plusieurs flux en un seul endroit : ANSSI, ZDNet, The Hacker
+        News, Le Monde Informatique. Ça évite de faire le tour de chaque site manuellement et ça
+        permet de repérer rapidement les sujets qui reviennent souvent (signe que c'est important).
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        C'est l'outil le plus pratique pour une veille régulière. Le vrai avantage : le gain de temps.
+        Je scanne les titres en quelques minutes et j'approfondis seulement ce qui est pertinent.
+        La clé, c'est de bien choisir ses sources au départ.
+      </div>
+    </div>
+
+    <!-- HACKER NEWS -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">Hacker News</div>
+        <div class="source-url">news.ycombinator.com</div>
+      </div>
+      <p>
+        Hacker News est un agrégateur de liens techniques très suivi par les développeurs et les
+        professionnels de la sécurité. Les sujets sur l'IA générative, les nouvelles vulnérabilités
+        et les débats sur l'éthique de l'IA y sont régulièrement en tête de liste.
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        Une bonne source pour détecter les tendances émergentes avant qu'elles arrivent dans la
+        presse grand public. Les commentaires sont souvent très techniques et permettent de
+        comprendre les enjeux en profondeur. Niveau de difficulté plus élevé que Reddit, mais la
+        qualité est meilleure.
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLEAU RESUME -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">05</div>
+      <h2>Synthèse de ma veille</h2>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Point fort</th>
+            <th>Limite</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ANSSI</strong></td>
+            <td>Données officielles, incidents réels</td>
+            <td>Technique, peu accessible</td>
+            <td>Référence principale (risques SI)</td>
+          </tr>
+          <tr>
+            <td><strong>CNIL</strong></td>
+            <td>Cadre légal RGPD clair</td>
+            <td>Orienté conformité</td>
+            <td>Vérifier la légalité des usages</td>
+          </tr>
+          <tr>
+            <td><strong>r/netsec</strong></td>
+            <td>Retours terrain récents</td>
+            <td>Non vérifié, à croiser</td>
+            <td>Signal d'alerte rapide</td>
+          </tr>
+          <tr>
+            <td><strong>Feedly</strong></td>
+            <td>Centralise les sources</td>
+            <td>Qualité variable selon les flux</td>
+            <td>Veille quotidienne</td>
+          </tr>
+          <tr>
+            <td><strong>Hacker News</strong></td>
+            <td>Tendances tech en avance</td>
+            <td>Très technique, en anglais</td>
+            <td>Détection d'outils émergents</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:20px;">
+      Je consulte ces sources chaque semaine et je produis une synthèse régulièrement.
+    </p>
+
+    <h3 style="margin-top:36px;">Ce que cette veille m'a apporté</h3>
+    <ul class="clean-list">
+      <li>Mieux comprendre les enjeux de sécurité</li>
+      <li>Prendre du recul sur les nouvelles technologies</li>
+      <li>Faire le lien avec mon métier</li>
+    </ul>
+  </section>
+
+  <!-- CONCLUSION -->
+  <section>
+    <div class="conclusion">
+      <div class="section-head">
+        <div class="section-num">06</div>
+        <h2>Conclusion</h2>
+      </div>
+
+      <p class="pull">
+        L'IA générative va rester dans les entreprises. Le but n'est pas de l'éviter, mais de bien
+        l'utiliser.
+      </p>
+
+      <p>En tant que futur technicien SISR, je devrai :</p>
+      <ul class="clean-list">
+        <li>Sécuriser les usages</li>
+        <li>Accompagner les utilisateurs</li>
+        <li>Protéger les données</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>BTS SIO SISR · Veille technologique</div>
+    <div>Alternance · Caisse des Dépôts et Consignations · 2024–2025</div>
+  </div>
+
+</div>
+</body>
+</html>
