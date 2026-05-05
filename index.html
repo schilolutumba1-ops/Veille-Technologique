@@ -375,6 +375,134 @@
     font-weight: 500;
   }
 
+  /* FICHES D'ARTICLES */
+  .fiche-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: border-color 0.2s ease;
+  }
+
+  .fiche-card:hover { border-color: var(--accent-blue); }
+
+  .fiche-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  .fiche-date {
+    background: rgba(125, 211, 192, 0.12);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .fiche-source {
+    color: var(--text-mute);
+    text-transform: uppercase;
+  }
+
+  .fiche-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.35;
+  }
+
+  .fiche-resume {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  .fiche-retenu {
+    padding: 12px 14px;
+    background: var(--bg-soft);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .fiche-retenu strong {
+    display: block;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  /* ARCHI+ CARD */
+  .archi-card {
+    background: linear-gradient(135deg, rgba(125, 211, 192, 0.05) 0%, rgba(138, 180, 248, 0.03) 100%);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-blue);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .archi-card h3 {
+    color: var(--accent-blue);
+    margin-bottom: 16px;
+  }
+
+  /* AI ACT TIMELINE */
+  .timeline {
+    margin: 24px 0;
+    padding-left: 0;
+    list-style: none;
+    border-left: 2px solid var(--border);
+  }
+
+  .timeline li {
+    position: relative;
+    padding: 12px 0 12px 28px;
+    color: var(--text-dim);
+  }
+
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 18px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-warm);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-warm);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .timeline .event {
+    color: var(--text);
+    font-weight: 500;
+  }
+
   /* CONCLUSION */
   .conclusion {
     background: linear-gradient(135deg, rgba(125, 211, 192, 0.08) 0%, rgba(138, 180, 248, 0.04) 100%);
@@ -433,6 +561,8 @@
     .problem-card { padding: 24px; }
     .problem-card p { font-size: 1.1rem; }
     .source-card { padding: 22px; }
+    .fiche-card { padding: 20px; }
+    .archi-card { padding: 22px; }
     .conclusion { padding: 28px 22px; }
     section { margin-bottom: 56px; }
     h2 { font-size: 1.55rem; }
@@ -582,10 +712,53 @@
     </div>
   </section>
 
-  <!-- SOURCES -->
+  <!-- APPLICATION ENTREPRISE - ARCHI+ -->
   <section>
     <div class="section-head">
       <div class="section-num">04</div>
+      <h2>Application en entreprise : Archi+</h2>
+    </div>
+
+    <p>
+      Pendant mon alternance à la Caisse des Dépôts, j'ai pu observer la mise en place d'un outil
+      interne d'IA générative baptisé <strong>Archi+</strong>. Cet outil illustre concrètement
+      comment une grande institution publique adapte les recommandations de l'ANSSI à son contexte.
+    </p>
+
+    <div class="archi-card">
+      <h3>Le besoin auquel Archi+ répond</h3>
+      <p>
+        Les collaborateurs avaient besoin des bénéfices de l'IA générative (productivité, aide à la
+        rédaction, recherche d'informations internes) sans pouvoir utiliser des services externes
+        comme ChatGPT, qui auraient impliqué l'envoi de données sensibles vers des serveurs tiers.
+      </p>
+
+      <h3 style="margin-top:20px;">Le principe de fonctionnement</h3>
+      <p>
+        Archi+ repose sur un modèle de langage hébergé en interne, dans un environnement cloisonné
+        du système d'information principal. Les requêtes des utilisateurs ne sortent pas du
+        périmètre de l'entreprise. C'est exactement le principe de <strong>cloisonnement</strong>
+        recommandé par l'ANSSI dans son rapport CERTFR-2026-CTI-001.
+      </p>
+
+      <h3 style="margin-top:20px;">Ce que cela m'a appris</h3>
+      <p>
+        Cette expérience m'a montré qu'il existe une voie médiane entre interdire l'IA (frustration
+        des utilisateurs et apparition du Shadow AI) et l'utiliser sans contrôle (fuites de données).
+        La solution passe par une infrastructure dédiée, un cadre clair sur les usages autorisés,
+        et un accompagnement des utilisateurs.
+      </p>
+    </div>
+
+    <div class="arrow-callout">
+      <p>Archi+ est un cas concret qui valide la pertinence des recommandations officielles.</p>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">05</div>
       <h2>Analyse des sources</h2>
     </div>
 
@@ -702,10 +875,177 @@
     </div>
   </section>
 
+  <!-- FICHES D'ARTICLES -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">06</div>
+      <h2>Mes fiches de veille</h2>
+    </div>
+
+    <p style="margin-bottom:28px;">
+      Voici quelques articles ou publications que j'ai consultés pendant ma veille, datés et
+      analysés. Ces fiches matérialisent la régularité de ma démarche et permettent de retrouver
+      facilement les éléments importants.
+    </p>
+
+    <!-- FICHE 1 -->
+    <div class="fiche-card">
+      <div class="fiche-meta">
+        <span class="fiche-date">04 / 02 / 2026</span>
+        <span class="fiche-source">ANSSI · cert.ssi.gouv.fr</span>
+      </div>
+      <div class="fiche-title">L'intelligence artificielle générative face aux attaques informatiques (CERTFR-2026-CTI-001)</div>
+      <div class="fiche-resume">
+        Premier rapport officiel français sur l'usage dual de l'IA générative dans le paysage cyber.
+        L'ANSSI confirme qu'aucune attaque autonome menée par IA n'a été observée contre des acteurs
+        français, mais que les groupes étatiques (Iran, Chine, Corée du Nord, Russie) intègrent
+        massivement ces outils dans leurs chaînes d'attaque.
+      </div>
+      <div class="fiche-retenu">
+        <strong>Ce que j'en retiens</strong>
+        Valide la pertinence d'outils internes type Archi+. Le cloisonnement entre système d'IA et
+        SI principal devient une recommandation officielle, pas un choix optionnel.
+      </div>
+    </div>
+
+    <!-- FICHE 2 -->
+    <div class="fiche-card">
+      <div class="fiche-meta">
+        <span class="fiche-date">22 / 07 / 2025</span>
+        <span class="fiche-source">CNIL · cnil.fr</span>
+      </div>
+      <div class="fiche-title">Recommandations finales sur l'application du RGPD au développement des systèmes d'IA</div>
+      <div class="fiche-resume">
+        La CNIL publie son corpus de fiches pratiques après consultation publique. Elle clarifie
+        quand le RGPD s'applique à un système d'IA et propose des solutions concrètes :
+        anonymisation, filtres robustes, documentation des choix de conception (privacy by design).
+      </div>
+      <div class="fiche-retenu">
+        <strong>Ce que j'en retiens</strong>
+        Le RGPD ne bloque pas l'innovation IA en Europe, contrairement à une idée reçue. Mais il
+        impose une démarche structurée que beaucoup d'entreprises sous-estiment.
+      </div>
+    </div>
+
+    <!-- FICHE 3 -->
+    <div class="fiche-card">
+      <div class="fiche-meta">
+        <span class="fiche-date">FÉVRIER 2025</span>
+        <span class="fiche-source">UNION EUROPÉENNE</span>
+      </div>
+      <div class="fiche-title">Entrée en application progressive de l'AI Act européen</div>
+      <div class="fiche-resume">
+        Le règlement européen sur l'IA entre en vigueur. Certaines pratiques sont désormais
+        interdites en Europe : scoring social, reconnaissance des émotions au travail ou à l'école,
+        manipulation subliminale. Les obligations pour les systèmes à haut risque suivront entre
+        2026 et 2027.
+      </div>
+      <div class="fiche-retenu">
+        <strong>Ce que j'en retiens</strong>
+        Premier cadre réglementaire mondial dédié à l'IA. Va structurer la cybersécurité IA des
+        entreprises européennes pour les prochaines années.
+      </div>
+    </div>
+
+    <!-- FICHE 4 -->
+    <div class="fiche-card">
+      <div class="fiche-meta">
+        <span class="fiche-date">FÉVRIER 2026</span>
+        <span class="fiche-source">LE MONDE INFORMATIQUE</span>
+      </div>
+      <div class="fiche-title">L'ANSSI livre son bilan de la menace IA en 2025</div>
+      <div class="fiche-resume">
+        Article qui synthétise et vulgarise le rapport CERTFR-2026-CTI-001. Souligne notamment
+        l'utilisation par les attaquants des protocoles MCP (Model Context Protocol) pour
+        compromettre les agents IA, un risque émergent encore peu connu.
+      </div>
+      <div class="fiche-retenu">
+        <strong>Ce que j'en retiens</strong>
+        Les protocoles d'intégration des LLM (MCP) deviennent une nouvelle surface d'attaque.
+        À surveiller de près à mesure que les agents IA se déploient en entreprise.
+      </div>
+    </div>
+
+    <!-- FICHE 5 -->
+    <div class="fiche-card">
+      <div class="fiche-meta">
+        <span class="fiche-date">MARS 2026</span>
+        <span class="fiche-source">CNIL × ANSSI</span>
+      </div>
+      <div class="fiche-title">Projet PANAME : un outil d'audit RGPD pour les modèles d'IA</div>
+      <div class="fiche-resume">
+        Initiative conjointe CNIL, ANSSI, Inria et PEReN pour développer un outil open source
+        permettant de tester si un modèle d'IA est anonyme au sens du RGPD ou s'il fuite des
+        données personnelles.
+      </div>
+      <div class="fiche-retenu">
+        <strong>Ce que j'en retiens</strong>
+        Convergence inédite entre régulateur des données et autorité cyber. Montre que les enjeux
+        techniques et juridiques de l'IA ne peuvent plus être traités séparément.
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ACT -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">07</div>
+      <h2>Sujet à suivre : l'AI Act européen</h2>
+    </div>
+
+    <p>
+      Le règlement européen sur l'intelligence artificielle (AI Act) est le premier cadre
+      réglementaire mondial dédié à l'IA. Son entrée en application est progressive et va
+      transformer la manière dont les entreprises européennes peuvent déployer des systèmes
+      d'IA. C'est un sujet à suivre de près dans les prochains mois.
+    </p>
+
+    <h3 style="margin-top:24px;">Calendrier de mise en application</h3>
+
+    <ul class="timeline">
+      <li>
+        <span class="date">Février 2025</span>
+        <span class="event">Entrée en vigueur des interdictions</span>
+        <p style="margin-top:6px; font-size:14px;">
+          Scoring social, reconnaissance des émotions au travail ou à l'école, manipulation
+          subliminale, identification biométrique en temps réel sont désormais interdits en Europe.
+        </p>
+      </li>
+      <li>
+        <span class="date">Août 2025</span>
+        <span class="event">Obligations pour les modèles d'IA à usage général</span>
+        <p style="margin-top:6px; font-size:14px;">
+          Les fournisseurs de grands modèles (OpenAI, Anthropic, Mistral...) doivent publier
+          un résumé des données d'entraînement et respecter le droit d'auteur.
+        </p>
+      </li>
+      <li>
+        <span class="date">Août 2026</span>
+        <span class="event">Application aux systèmes d'IA à haut risque</span>
+        <p style="margin-top:6px; font-size:14px;">
+          Les systèmes utilisés pour le tri de CV, le scoring de crédit ou le diagnostic médical
+          devront respecter des exigences strictes : documentation, tests, supervision humaine.
+        </p>
+      </li>
+      <li>
+        <span class="date">Août 2027</span>
+        <span class="event">Application complète</span>
+        <p style="margin-top:6px; font-size:14px;">
+          L'ensemble des dispositions du règlement devient applicable. La CNIL est désignée
+          autorité de surveillance du marché en France.
+        </p>
+      </li>
+    </ul>
+
+    <div class="arrow-callout">
+      <p>Pour une institution comme la CDC, l'articulation AI Act / RGPD sera un chantier majeur.</p>
+    </div>
+  </section>
+
   <!-- TABLEAU RESUME -->
   <section>
     <div class="section-head">
-      <div class="section-num">05</div>
+      <div class="section-num">08</div>
       <h2>Synthèse de ma veille</h2>
     </div>
 
@@ -771,7 +1111,7 @@
   <section>
     <div class="conclusion">
       <div class="section-head">
-        <div class="section-num">06</div>
+        <div class="section-num">09</div>
         <h2>Conclusion</h2>
       </div>
 
@@ -786,6 +1126,11 @@
         <li>Accompagner les utilisateurs</li>
         <li>Protéger les données</li>
       </ul>
+
+      <p style="margin-top:20px;">
+        Ma veille continuera après le BTS, notamment sur l'AI Act et son application concrète,
+        ainsi que sur les nouveaux risques liés aux agents IA autonomes.
+      </p>
     </div>
   </section>
 
