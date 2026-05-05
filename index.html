@@ -497,8 +497,9 @@
 
     <h3>Ce que l'IA apporte</h3>
     <p>
-      L'IA peut vraiment aider au quotidien. Ces usages sont largement documentés et discutés sur
-      Hacker News et Reddit (r/sysadmin), où les praticiens partagent leurs retours concrets :
+      L'IA peut vraiment aider au quotidien. Ces usages sont largement documentés dans la presse
+      spécialisée (Le Monde Informatique) et sur Hacker News, où les professionnels partagent leurs
+      retours concrets :
     </p>
 
     <ul class="clean-list">
@@ -515,8 +516,8 @@
 
     <h3 style="margin-top:40px;">Les risques</h3>
     <p>
-      Ces dangers ont été identifiés via ma veille sur r/netsec, les alertes ANSSI et les flux
-      Feedly sur la cybersécurité.
+      Ces dangers ont été identifiés via les rapports officiels de l'ANSSI et de la CNIL,
+      complétés par la presse spécialisée et les flux Feedly sur la cybersécurité.
     </p>
 
     <div class="table-scroll">
@@ -537,12 +538,12 @@
           <tr>
             <td><strong>Shadow AI</strong></td>
             <td>Utiliser des outils non autorisés par la DSI</td>
-            <td><span class="src-tag">r/netsec</span><span class="src-tag">Feedly</span></td>
+            <td><span class="src-tag">ANSSI</span><span class="src-tag">Le Monde Info</span></td>
           </tr>
           <tr>
             <td><strong>Prompt injection</strong></td>
             <td>Manipuler une IA pour lui faire exécuter des actions dangereuses</td>
-            <td><span class="src-tag">Hacker News</span><span class="src-tag">r/netsec</span></td>
+            <td><span class="src-tag">ANSSI</span><span class="src-tag">Hacker News</span></td>
           </tr>
         </tbody>
       </table>
@@ -595,23 +596,24 @@
         <div class="source-url">cert.ssi.gouv.fr</div>
       </div>
       <p>
-        L'ANSSI a publié en février 2026 un rapport officiel sur l'état de la menace liée à l'IA
-        générative. Ce document confirme que des groupes d'attaquants étatiques (comme Lazarus, lié à
-        la Corée du Nord) utilisent déjà l'IA pour créer de faux profils, générer des malwares et
-        améliorer leurs campagnes de phishing. L'agence recense plus de 40 modes opératoires d'attaque
-        ayant utilisé l'IA entre 2023 et 2024.
+        Le 4 février 2026, l'ANSSI a publié son rapport officiel
+        <strong>« L'intelligence artificielle générative face aux attaques informatiques »</strong>
+        (référence CERTFR-2026-CTI-001). Ce document dresse un état des lieux de l'usage de l'IA
+        générative par les attaquants : ingénierie sociale, génération de code malveillant, création
+        de faux profils. Selon Google cité dans le rapport, le modèle Gemini a été détourné entre
+        2023 et 2024 par des opérateurs liés à au moins dix groupes iraniens, vingt chinois, neuf
+        nord-coréens et trois russes.
       </p>
       <p>
-        L'ANSSI déconseille formellement d'utiliser des outils comme ChatGPT ou Copilot pour traiter
-        des données sensibles, et recommande un cloisonnement strict entre le système d'IA et le
-        reste du SI.
+        L'ANSSI recommande un cloisonnement strict entre les systèmes d'IA et le reste du SI, et
+        déconseille l'envoi de données sensibles vers des services en ligne comme ChatGPT ou Copilot.
       </p>
       <div class="avis">
         <strong>Mon avis</strong>
-        C'est la source la plus solide et la plus fiable de ma veille. Une agence gouvernementale
-        française dont les rapports reposent sur des observations réelles d'incidents. Ce qu'elle dit
-        sur le Shadow AI et la fuite de données rejoint directement ce que j'ai observé à la CDC, où
-        Archi+ a justement été conçu pour éviter ces risques.
+        C'est la source la plus solide de ma veille. Document officiel, daté, accessible publiquement.
+        Le principe de cloisonnement qu'il défend correspond exactement à la démarche suivie à la
+        Caisse des Dépôts avec l'outil Archi+, conçu justement pour utiliser l'IA sans exposer les
+        données vers l'extérieur.
       </div>
     </div>
 
@@ -622,62 +624,41 @@
         <div class="source-url">cnil.fr</div>
       </div>
       <p>
-        La CNIL a publié plusieurs séries de recommandations entre 2024 et 2025 sur l'application du
-        RGPD à l'IA générative. Le message central : quand une IA traite des données personnelles
-        (ce qui est presque toujours le cas avec un LLM), le RGPD s'applique. Envoyer un prompt
-        contenant des données clients à un service en ligne, c'est comme les déposer sur un serveur
-        qui ne vous appartient pas.
+        La CNIL a publié le 22 juillet 2025 ses recommandations finales sur l'application du RGPD au
+        développement des systèmes d'IA. Le message central : dès qu'un modèle de langage peut
+        mémoriser des données personnelles, le RGPD s'applique. Envoyer un prompt contenant des
+        données clients à un service externe revient à les déposer sur un serveur tiers.
       </p>
       <p>
-        La CNIL pointe aussi des risques techniques précis : empoisonnement des données
-        d'entraînement, extraction de données via le modèle, et injection de prompts malveillants.
+        La CNIL identifie les risques techniques spécifiques : empoisonnement des données
+        d'entraînement, extraction de données via le modèle (model inversion), injection de prompts
+        malveillants. Elle recommande chiffrement, contrôle d'accès et journalisation systématique.
       </p>
       <div class="avis">
         <strong>Mon avis</strong>
-        La CNIL apporte le cadre légal que l'ANSSI n'aborde pas. C'est complémentaire. Ce que je
-        retiens surtout : beaucoup d'entreprises utilisent l'IA sans avoir vérifié leur conformité
-        RGPD. Pour un technicien SISR, comprendre ces obligations, c'est aussi faire partie de la
-        solution.
+        La CNIL apporte le cadre légal que l'ANSSI n'aborde pas. C'est complémentaire et
+        indispensable. Pour un futur technicien SISR, comprendre ces obligations fait partie du
+        métier : c'est souvent à la DSI de mettre en œuvre concrètement les exigences du DPO.
       </div>
     </div>
 
-    <!-- REDDIT -->
+    <!-- LE MONDE INFORMATIQUE -->
     <div class="source-card">
       <div class="source-head">
-        <div class="source-name">Reddit — r/netsec & r/sysadmin</div>
-        <div class="source-url">reddit.com</div>
+        <div class="source-name">Le Monde Informatique</div>
+        <div class="source-url">lemondeinformatique.fr</div>
       </div>
       <p>
-        Ces deux communautés sont très actives et donnent accès à des retours d'expérience concrets
-        que la presse spécialisée ne couvre pas forcément. Sur r/netsec, les discussions sur le
-        Shadow AI et la prompt injection sont fréquentes, avec des exemples réels de situations
-        rencontrées par des admins et des pentesters.
+        Presse spécialisée française dédiée aux professionnels de l'IT. Les articles couvrent
+        l'actualité cybersécurité, cloud, IA et transformation numérique avec un angle entreprise.
+        C'est ma source principale pour suivre les annonces officielles, les retours d'expérience
+        terrain et les analyses de fond entre deux rapports institutionnels.
       </p>
       <div class="avis">
         <strong>Mon avis</strong>
-        Reddit est utile pour comprendre ce qui se passe vraiment sur le terrain, pas juste dans les
-        rapports officiels. La limite : les informations ne sont pas vérifiées, il faut croiser avec
-        des sources plus sérieuses comme l'ANSSI. Je l'utilise surtout comme signal d'alerte, pas
-        comme référence finale.
-      </div>
-    </div>
-
-    <!-- FEEDLY -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">Feedly — agrégateur RSS</div>
-        <div class="source-url">feedly.com</div>
-      </div>
-      <p>
-        Feedly me permet de centraliser plusieurs flux en un seul endroit : ANSSI, ZDNet, The Hacker
-        News, Le Monde Informatique. Ça évite de faire le tour de chaque site manuellement et ça
-        permet de repérer rapidement les sujets qui reviennent souvent (signe que c'est important).
-      </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        C'est l'outil le plus pratique pour une veille régulière. Le vrai avantage : le gain de temps.
-        Je scanne les titres en quelques minutes et j'approfondis seulement ce qui est pertinent.
-        La clé, c'est de bien choisir ses sources au départ.
+        Qualité éditoriale fiable, mise à jour quotidienne, ton adapté aux professionnels. C'est le
+        bon intermédiaire entre la source officielle (parfois aride) et la veille terrain. Un titre
+        qui m'a particulièrement aidé à comprendre l'impact concret du rapport ANSSI 2026.
       </div>
     </div>
 
@@ -689,15 +670,34 @@
       </div>
       <p>
         Hacker News est un agrégateur de liens techniques très suivi par les développeurs et les
-        professionnels de la sécurité. Les sujets sur l'IA générative, les nouvelles vulnérabilités
-        et les débats sur l'éthique de l'IA y sont régulièrement en tête de liste.
+        professionnels de la sécurité au niveau international. Les sujets sur l'IA générative, les
+        nouvelles vulnérabilités et les débats sur l'éthique y sont régulièrement en tête de
+        classement.
       </p>
       <div class="avis">
         <strong>Mon avis</strong>
-        Une bonne source pour détecter les tendances émergentes avant qu'elles arrivent dans la
-        presse grand public. Les commentaires sont souvent très techniques et permettent de
-        comprendre les enjeux en profondeur. Niveau de difficulté plus élevé que Reddit, mais la
-        qualité est meilleure.
+        Bonne source pour détecter les tendances avant qu'elles n'arrivent dans la presse française.
+        Les commentaires sont souvent très techniques et permettent d'aller au fond des sujets.
+        Niveau d'exigence élevé, mais qualité au rendez-vous.
+      </div>
+    </div>
+
+    <!-- FEEDLY -->
+    <div class="source-card">
+      <div class="source-head">
+        <div class="source-name">Feedly — agrégateur RSS</div>
+        <div class="source-url">feedly.com</div>
+      </div>
+      <p>
+        Feedly est l'outil qui me permet de centraliser mes flux en un seul endroit : ANSSI, CNIL,
+        Le Monde Informatique, Hacker News. Cela évite de visiter chaque site manuellement et permet
+        de repérer rapidement les sujets qui reviennent souvent (signe que c'est important).
+      </p>
+      <div class="avis">
+        <strong>Mon avis</strong>
+        Ce n'est pas une source en soi, mais l'outil qui rend ma veille régulière possible. Le vrai
+        travail consiste à bien choisir les flux au départ et à filtrer ce qui mérite d'être lu en
+        profondeur.
       </div>
     </div>
   </section>
@@ -722,47 +722,48 @@
         <tbody>
           <tr>
             <td><strong>ANSSI</strong></td>
-            <td>Données officielles, incidents réels</td>
-            <td>Technique, peu accessible</td>
-            <td>Référence principale (risques SI)</td>
+            <td>Référence officielle, données vérifiées</td>
+            <td>Très technique</td>
+            <td>Source principale risques SI</td>
           </tr>
           <tr>
             <td><strong>CNIL</strong></td>
-            <td>Cadre légal RGPD clair</td>
+            <td>Cadre juridique RGPD clair</td>
             <td>Orienté conformité</td>
             <td>Vérifier la légalité des usages</td>
           </tr>
           <tr>
-            <td><strong>r/netsec</strong></td>
-            <td>Retours terrain récents</td>
-            <td>Non vérifié, à croiser</td>
-            <td>Signal d'alerte rapide</td>
-          </tr>
-          <tr>
-            <td><strong>Feedly</strong></td>
-            <td>Centralise les sources</td>
-            <td>Qualité variable selon les flux</td>
-            <td>Veille quotidienne</td>
+            <td><strong>Le Monde Informatique</strong></td>
+            <td>Actualité IT pro quotidienne</td>
+            <td>Articles parfois courts</td>
+            <td>Veille hebdomadaire</td>
           </tr>
           <tr>
             <td><strong>Hacker News</strong></td>
-            <td>Tendances tech en avance</td>
-            <td>Très technique, en anglais</td>
-            <td>Détection d'outils émergents</td>
+            <td>Tendances internationales</td>
+            <td>En anglais, très technique</td>
+            <td>Détection signaux émergents</td>
+          </tr>
+          <tr>
+            <td><strong>Feedly</strong></td>
+            <td>Centralise toutes les sources</td>
+            <td>Outil, pas une source</td>
+            <td>Veille quotidienne</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <p style="margin-top:20px;">
-      Je consulte ces sources chaque semaine et je produis une synthèse régulièrement.
+      Je consulte ces sources chaque semaine via Feedly, et je produis une synthèse régulière des
+      éléments importants pour mon métier.
     </p>
 
     <h3 style="margin-top:36px;">Ce que cette veille m'a apporté</h3>
     <ul class="clean-list">
-      <li>Mieux comprendre les enjeux de sécurité</li>
-      <li>Prendre du recul sur les nouvelles technologies</li>
-      <li>Faire le lien avec mon métier</li>
+      <li>Mieux comprendre les enjeux de sécurité liés à l'IA générative</li>
+      <li>Prendre du recul sur les annonces marketing autour des nouvelles technologies</li>
+      <li>Faire le lien entre théorie et pratique grâce à mon alternance</li>
     </ul>
   </section>
 
