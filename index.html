@@ -6,22 +6,19 @@
 <title>Veille Technologique — L'IA générative en entreprise</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1419;
-    --bg-soft: #161c24;
-    --surface: #1c232d;
-    --surface-2: #222a35;
-    --border: #2a333f;
-    --text: #e6ebf2;
-    --text-dim: #9aa5b5;
-    --text-mute: #6b7683;
-    --accent: #7dd3c0;
-    --accent-warm: #f4a261;
-    --accent-red: #e76f51;
-    --accent-blue: #8ab4f8;
-    --grid-line: rgba(125, 211, 192, 0.08);
+    --ink: #0f1822;
+    --ink-soft: #2c3a4d;
+    --paper: #f6f3ec;
+    --paper-warm: #ede7d8;
+    --rule: #1a2433;
+    --accent: #b8531a;
+    --accent-soft: #c97a3e;
+    --muted: #6b7585;
+    --highlight: #fff4d6;
+    --max: 1180px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,1117 +26,1237 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter Tight', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
     line-height: 1.65;
-    font-size: 16px;
-    background-image:
-      radial-gradient(circle at 15% 20%, rgba(125, 211, 192, 0.06) 0%, transparent 40%),
-      radial-gradient(circle at 85% 70%, rgba(244, 162, 97, 0.04) 0%, transparent 40%);
-    background-attachment: fixed;
-    min-height: 100vh;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .wrap {
-    max-width: 920px;
+  /* ====== HEADER ====== */
+  header.site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+    background: rgba(246, 243, 236, 0.92);
+  }
+  .header-inner {
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 60px 32px 80px;
-  }
-
-  /* HEADER */
-  .header {
-    position: relative;
-    padding: 48px 0 56px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 64px;
-  }
-
-  .tag-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 32px;
+    justify-content: space-between;
+    align-items: center;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
-    color: var(--text-mute);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-
-  .tag-row span {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  .header-inner .logo { font-weight: 500; }
+  .header-inner nav a {
+    color: var(--ink);
+    text-decoration: none;
+    margin-left: 28px;
+    transition: color 0.2s;
   }
+  .header-inner nav a:hover { color: var(--accent); }
 
-  .tag-row span::before {
-    content: "";
-    width: 4px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 50%;
+  /* ====== HERO ====== */
+  .hero {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 90px 32px 80px;
+    border-bottom: 1px solid var(--rule);
   }
-
-  .tag-row span:not(:first-child)::before {
-    background: var(--text-mute);
-  }
-
-  h1.title {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 24px;
-  }
-
-  h1.title em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .lede {
-    font-size: 1.15rem;
-    color: var(--text-dim);
-    max-width: 640px;
-    line-height: 1.6;
-  }
-
-  .meta-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    margin-top: 40px;
-    padding-top: 28px;
-    border-top: 1px dashed var(--border);
+  .hero .label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-mute);
-  }
-
-  .meta-bar div span {
-    display: block;
-    color: var(--text);
-    margin-top: 4px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  /* SECTIONS */
-  section { margin-bottom: 72px; }
-
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 28px;
   }
-
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
-
-  h2 {
+  .hero h1 {
     font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.9rem;
-    letter-spacing: -0.015em;
-    color: var(--text);
-    line-height: 1.2;
-  }
-
-  h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: var(--text);
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-  }
-
-  p { margin-bottom: 16px; color: var(--text-dim); }
-  p strong { color: var(--text); font-weight: 600; }
-
-  /* PROBLEMATIQUE CARD */
-  .problem-card {
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-    padding: 28px 32px;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     margin-bottom: 32px;
-    position: relative;
+    max-width: 900px;
   }
-
-  .problem-card::before {
-    content: "?";
-    position: absolute;
-    top: 12px;
-    right: 20px;
-    font-family: 'Fraunces', serif;
-    font-size: 4rem;
+  .hero h1 em {
     font-style: italic;
+    font-weight: 400;
     color: var(--accent);
-    opacity: 0.15;
-    line-height: 1;
   }
-
-  .problem-card .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .problem-card p {
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.45;
-    margin: 0;
-  }
-
-  /* ARROW CALLOUT */
-  .arrow-callout {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 18px 22px;
-    background: rgba(125, 211, 192, 0.06);
-    border-radius: 4px;
-    margin: 20px 0;
-  }
-
-  .arrow-callout::before {
-    content: "→";
-    color: var(--accent);
-    font-size: 1.3rem;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-
-  .arrow-callout p {
-    margin: 0;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  /* LISTS */
-  ul.clean-list {
-    list-style: none;
-    margin: 16px 0 24px;
-    padding: 0;
-  }
-
-  ul.clean-list li {
-    position: relative;
-    padding: 10px 0 10px 28px;
-    color: var(--text-dim);
-    border-bottom: 1px dashed var(--border);
-  }
-
-  ul.clean-list li:last-child { border-bottom: none; }
-
-  ul.clean-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 18px;
-    width: 14px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  /* TABLES */
-  .table-scroll {
-    overflow-x: auto;
-    margin: 24px 0;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    min-width: 560px;
-  }
-
-  thead {
-    background: var(--surface-2);
-  }
-
-  th {
-    text-align: left;
-    padding: 14px 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-  }
-
-  td {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-dim);
-    vertical-align: top;
-  }
-
-  tbody tr:last-child td { border-bottom: none; }
-
-  tbody tr:hover { background: rgba(125, 211, 192, 0.03); }
-
-  td strong { color: var(--text); font-weight: 600; }
-
-  .src-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    background: rgba(138, 180, 248, 0.12);
-    color: var(--accent-blue);
-    border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    margin: 2px 4px 2px 0;
-  }
-
-  /* SOURCES */
-  .source-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 28px 30px;
-    margin-bottom: 20px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .source-card:hover {
-    border-color: var(--accent);
-    transform: translateX(2px);
-  }
-
-  .source-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-
-  .source-name {
+  .hero .lede {
     font-family: 'Fraunces', serif;
     font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--text);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 720px;
+    font-weight: 400;
   }
-
-  .source-url {
+  .hero-meta {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(26, 36, 51, 0.15);
+  }
+  .hero-meta div .key {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-mute);
-  }
-
-  .source-card .avis {
-    margin-top: 16px;
-    padding: 16px 18px;
-    background: var(--bg-soft);
-    border-left: 2px solid var(--accent-warm);
-    border-radius: 0 4px 4px 0;
-    font-size: 14px;
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .source-card .avis strong {
-    font-style: normal;
-    color: var(--accent-warm);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 10px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .hero-meta div .val {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
   }
 
-  /* FICHES D'ARTICLES */
-  .fiche-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 24px 28px;
-    margin-bottom: 16px;
-    position: relative;
-    transition: border-color 0.2s ease;
+  /* ====== SECTIONS ====== */
+  section.chapter {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 90px 32px 60px;
+    border-bottom: 1px solid rgba(26, 36, 51, 0.15);
   }
-
-  .fiche-card:hover { border-color: var(--accent-blue); }
-
-  .fiche-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 14px;
+  .chapter-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.05em;
-  }
-
-  .fiche-date {
-    background: rgba(125, 211, 192, 0.12);
+    letter-spacing: 0.2em;
     color: var(--accent);
-    padding: 3px 10px;
-    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  .chapter h2 {
+    font-family: 'Fraunces', serif;
     font-weight: 500;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
+    max-width: 800px;
   }
-
-  .fiche-source {
-    color: var(--text-mute);
+  .chapter h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 40px 0 16px;
+    color: var(--ink);
+  }
+  .chapter h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    color: var(--accent);
+    margin: 32px 0 12px;
+  }
+  .chapter p {
+    max-width: 720px;
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+  }
+  .chapter p strong { color: var(--ink); font-weight: 600; }
+  .chapter a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+  .chapter a:hover { color: var(--accent); }
+  .chapter ul, .chapter ol {
+    max-width: 720px;
+    margin: 16px 0 24px 24px;
+    color: var(--ink-soft);
+  }
+  .chapter li { margin-bottom: 8px; }
+
+  /* ====== KEY QUESTION ====== */
+  .key-question {
+    border-left: 3px solid var(--accent);
+    padding: 8px 0 8px 28px;
+    margin: 24px 0 40px;
+    max-width: 720px;
+  }
+  .key-question .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .key-question p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: var(--ink);
+    font-style: italic;
+    margin: 0;
   }
 
-  .fiche-title {
+  /* ====== METHODO ====== */
+  .methodo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 32px;
+  }
+  .methodo-grid .step {
+    border-top: 1px solid var(--ink);
+    padding-top: 16px;
+  }
+  .methodo-grid .step .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .methodo-grid .step h4 {
     font-family: 'Fraunces', serif;
     font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 10px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .methodo-grid .step p {
+    font-size: 0.95rem;
+    margin: 0;
   }
 
-  .fiche-resume {
-    font-size: 14px;
-    color: var(--text-dim);
-    margin-bottom: 12px;
+  /* ====== SOURCE CARDS ====== */
+  .source {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    margin: 56px 0;
+    padding-bottom: 56px;
+    border-bottom: 1px dotted rgba(26, 36, 51, 0.25);
+    align-items: start;
   }
-
-  .fiche-retenu {
-    padding: 12px 14px;
-    background: var(--bg-soft);
-    border-left: 2px solid var(--accent);
-    border-radius: 0 3px 3px 0;
-    font-size: 13px;
-    color: var(--text-dim);
+  .source:last-child { border-bottom: none; }
+  .source .visual {
+    background: var(--paper-warm);
+    border: 1px solid rgba(26, 36, 51, 0.15);
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
-
-  .fiche-retenu strong {
+  .source .visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
     display: block;
+  }
+  .source .info .source-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .source .info .source-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .source .info .source-url a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .source .info .source-url a:hover {
     color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .fiche .fiche-title a {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .fiche .fiche-title a:hover { color: var(--accent); }
+  .source .info .source-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    margin: 20px 0 24px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(26, 36, 51, 0.15);
+    border-bottom: 1px solid rgba(26, 36, 51, 0.15);
+  }
+  .source .info .source-meta .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .source .info .source-meta .v {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .source .info p { font-size: 0.97rem; max-width: none; }
+  .source .info .limit {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(184, 83, 26, 0.06);
+    border-left: 2px solid var(--accent);
+    font-size: 0.92rem;
+  }
+  .source .info .limit strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ====== CROSS ANALYSIS TABLE ====== */
+  .cross-table {
+    margin: 32px 0 40px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+  }
+  .cross-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 720px;
+  }
+  .cross-table th {
+    text-align: left;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    font-weight: 500;
+  }
+  .cross-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(26, 36, 51, 0.12);
+    vertical-align: top;
+    color: var(--ink-soft);
+  }
+  .cross-table tr:last-child td { border-bottom: none; }
+  .cross-table tr:nth-child(even) td { background: rgba(237, 231, 216, 0.4); }
+  .cross-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+  }
+
+  /* ====== INSIGHT BOX ====== */
+  .insight {
+    margin: 32px 0;
+    padding: 28px 32px;
+    background: var(--ink);
+    color: var(--paper);
+    max-width: 820px;
+  }
+  .insight .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    margin-bottom: 12px;
+  }
+  .insight p {
+    color: var(--paper);
+    max-width: none;
+    margin: 0;
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+
+  /* ====== ARCHI+ ====== */
+  .archi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .archi-card {
+    border: 1px solid var(--rule);
+    padding: 24px;
+    background: var(--paper);
+  }
+  .archi-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .archi-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 12px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .archi-card p { font-size: 0.95rem; margin: 0; }
+  .archi-card .link-source {
+    margin-top: 14px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 4px;
-    font-weight: 500;
+    color: var(--accent);
   }
 
-  /* ARCHI+ CARD */
-  .archi-card {
-    background: linear-gradient(135deg, rgba(125, 211, 192, 0.05) 0%, rgba(138, 180, 248, 0.03) 100%);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent-blue);
-    border-radius: 6px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
+  /* ====== FICHES ====== */
+  .fiche {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(26, 36, 51, 0.15);
   }
-
-  .archi-card h3 {
-    color: var(--accent-blue);
-    margin-bottom: 16px;
-  }
-
-  /* AI ACT TIMELINE */
-  .timeline {
-    margin: 24px 0;
-    padding-left: 0;
-    list-style: none;
-    border-left: 2px solid var(--border);
-  }
-
-  .timeline li {
-    position: relative;
-    padding: 12px 0 12px 28px;
-    color: var(--text-dim);
-  }
-
-  .timeline li::before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    top: 18px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent-warm);
-    border: 2px solid var(--bg);
-  }
-
-  .timeline .date {
+  .fiche:last-of-type { border-bottom: 1px solid rgba(26, 36, 51, 0.15); }
+  .fiche .fiche-date {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: var(--accent-warm);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+  }
+  .fiche .fiche-date .d { color: var(--ink); display: block; font-size: 13px; margin-bottom: 4px; }
+  .fiche .fiche-date .s { color: var(--accent); }
+  .fiche .fiche-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .fiche p { font-size: 0.95rem; margin: 0 0 10px; max-width: 700px; }
+  .fiche .retain {
+    margin-top: 12px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+  .fiche .retain strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
     display: block;
     margin-bottom: 4px;
   }
 
-  .timeline .event {
-    color: var(--text);
-    font-weight: 500;
+  /* ====== AI ACT TIMELINE ====== */
+  .timeline { margin: 32px 0; }
+  .timeline .item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(26, 36, 51, 0.15);
   }
-
-  /* CONCLUSION */
-  .conclusion {
-    background: linear-gradient(135deg, rgba(125, 211, 192, 0.08) 0%, rgba(138, 180, 248, 0.04) 100%);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 40px 36px;
-    margin-top: 48px;
+  .timeline .item:last-child { border-bottom: 1px solid rgba(26, 36, 51, 0.15); }
+  .timeline .item .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
-
-  .conclusion h2 { margin-bottom: 20px; }
-
-  .conclusion p.pull {
+  .timeline .item .what h4 {
     font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.5;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+    text-transform: none;
+    letter-spacing: 0;
   }
+  .timeline .item .what p { font-size: 0.95rem; margin: 0; max-width: 640px; }
 
-  /* FOOTER */
-  .footer {
+  /* ====== CONCLUSIONS LIST ====== */
+  .conclusions { margin: 32px 0; }
+  .conclusions .c {
+    padding: 24px 0;
+    border-top: 1px solid var(--ink);
+  }
+  .conclusions .c:last-child { border-bottom: 1px solid var(--ink); }
+  .conclusions .c .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .conclusions .c h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .conclusions .c p { margin: 0; max-width: 720px; }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 32px 40px;
     margin-top: 80px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
+  }
+  footer .footer-inner {
+    max-width: var(--max);
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 32px;
+  }
+  footer h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  footer .meta {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-mute);
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(246, 243, 236, 0.6);
+    text-transform: uppercase;
   }
 
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .header, section {
-    animation: fadeUp 0.6s ease backwards;
-  }
-
-  section:nth-child(2) { animation-delay: 0.08s; }
-  section:nth-child(3) { animation-delay: 0.16s; }
-  section:nth-child(4) { animation-delay: 0.24s; }
-  section:nth-child(5) { animation-delay: 0.32s; }
-
-  /* Responsive */
-  @media (max-width: 640px) {
-    .wrap { padding: 40px 20px 60px; }
-    .header { padding: 32px 0 40px; margin-bottom: 48px; }
-    .meta-bar { gap: 20px; }
-    .problem-card { padding: 24px; }
-    .problem-card p { font-size: 1.1rem; }
-    .source-card { padding: 22px; }
-    .fiche-card { padding: 20px; }
-    .archi-card { padding: 22px; }
-    .conclusion { padding: 28px 22px; }
-    section { margin-bottom: 56px; }
-    h2 { font-size: 1.55rem; }
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 800px) {
+    .hero-meta, .methodo-grid, .source, .archi-grid { grid-template-columns: 1fr; gap: 24px; }
+    .fiche, .timeline .item { grid-template-columns: 1fr; gap: 8px; }
+    .header-inner nav a { margin-left: 16px; }
+    .header-inner nav a:not(:last-child) { display: none; }
+    section.chapter, .hero { padding-left: 20px; padding-right: 20px; }
+    .insight { padding: 22px 24px; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="tag-row">
-      <span>BTS SIO — SISR</span>
-      <span>Veille Technologique</span>
-      <span>2024 / 2025</span>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">SISR · Veille 2024–2026</div>
+    <nav>
+      <a href="#problematique">Problématique</a>
+      <a href="#methodo">Méthodo</a>
+      <a href="#sources">Sources</a>
+      <a href="#analyse">Analyse</a>
+      <a href="#archi">Archi+</a>
+      <a href="#fiches">Fiches</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<div class="hero">
+  <div class="label">BTS SIO · SISR · Veille technologique</div>
+  <h1>L'IA générative en entreprise :<br><em>utile, mais risquée ?</em></h1>
+  <p class="lede">
+    Une veille technologique sur l'intégration des outils d'IA générative dans les environnements
+    professionnels, entre gains de productivité et enjeux de sécurité des données.
+  </p>
+  <div class="hero-meta">
+    <div>
+      <div class="key">Contexte</div>
+      <div class="val">Alternance — Caisse des Dépôts</div>
     </div>
-
-    <h1 class="title">L'IA générative en entreprise :<br><em>utile, mais risquée ?</em></h1>
-
-    <p class="lede">
-      Une veille technologique sur l'intégration des outils d'IA générative dans les environnements
-      professionnels, entre gains de productivité et enjeux de sécurité des données.
-    </p>
-
-    <div class="meta-bar">
-      <div>Contexte<span>Alternance — Caisse des Dépôts</span></div>
-      <div>Domaine<span>Cybersécurité / SI</span></div>
-      <div>Période<span>2024 — 2026</span></div>
+    <div>
+      <div class="key">Domaine</div>
+      <div class="val">Cybersécurité / Systèmes d'information</div>
     </div>
-  </header>
-
-  <!-- PROBLEMATIQUE -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">01</div>
-      <h2>Problématique</h2>
+    <div>
+      <div class="key">Période</div>
+      <div class="val">2024 — 2026</div>
     </div>
+  </div>
+</div>
 
-    <div class="problem-card">
-      <div class="label">Question centrale</div>
-      <p>Est-ce que l'IA générative peut vraiment aider les équipes IT sans mettre en danger les données de l'entreprise ?</p>
+<!-- ========== 01 PROBLÉMATIQUE ========== -->
+<section class="chapter" id="problematique">
+  <div class="chapter-num">01 — Problématique</div>
+  <h2>Comment profiter de l'IA générative sans exposer les données de l'entreprise ?</h2>
+
+  <div class="key-question">
+    <div class="tag">Question centrale</div>
+    <p>L'IA générative peut-elle vraiment aider les équipes IT sans mettre en danger les données de l'entreprise ?</p>
+  </div>
+
+  <h3>Pourquoi ce sujet ?</h3>
+  <p>
+    Depuis 2022, des outils comme ChatGPT, Copilot ou Gemini sont massivement utilisés en entreprise.
+    Pendant mon alternance à la Caisse des Dépôts, j'ai vu se déployer un outil interne (<strong>Archi+</strong>)
+    conçu pour utiliser l'IA générative sans exposer les données vers des serveurs externes.
+    Cette tension entre productivité et sécurité est exactement ce qui m'a poussé à choisir ce sujet :
+    c'est une problématique qui touche directement le métier de technicien SISR.
+  </p>
+
+  <h3>Ma démarche</h3>
+  <p>
+    Pour répondre à cette question, je n'ai pas pris une seule source et répété ce qu'elle dit.
+    J'ai sélectionné <strong>trois sources complémentaires</strong> (officielle, juridique, presse professionnelle)
+    et je les ai <strong>croisées entre elles</strong> pour faire émerger
+    les convergences, les angles morts et les sujets de fond.
+  </p>
+</section>
+
+<!-- ========== 02 MÉTHODOLOGIE ========== -->
+<section class="chapter" id="methodo">
+  <div class="chapter-num">02 — Méthodologie de veille</div>
+  <h2>Comment je construis ma veille au quotidien</h2>
+
+  <p>
+    Une veille technologique n'a de valeur que si elle est <strong>régulière, structurée et critique</strong>.
+    J'ai mis en place un processus en quatre étapes pour éviter le piège du copier-coller et faire
+    travailler les sources entre elles.
+  </p>
+
+  <div class="methodo-grid">
+    <div class="step">
+      <div class="num">Étape 01</div>
+      <h4>Sélection des sources</h4>
+      <p>
+        Trois sources choisies pour leur complémentarité : officielle (ANSSI), juridique (CNIL),
+        presse pro (Le Monde Informatique). Chaque source couvre un angle que les autres ne
+        couvrent pas, ce qui permet une vision complète d'un même sujet.
+      </p>
     </div>
+    <div class="step">
+      <div class="num">Étape 02</div>
+      <h4>Consultation directe et organisée</h4>
+      <p>
+        Je consulte chaque source directement sur son site, sans agrégateur intermédiaire.
+        Cette méthode me force à m'imprégner de la ligne éditoriale de chaque source et à
+        ne pas dépendre d'algorithmes de tri. Mes favoris navigateur sont organisés par
+        dossier thématique (Officiel / Presse / Communauté).
+      </p>
+    </div>
+    <div class="step">
+      <div class="num">Étape 03</div>
+      <h4>Filtrage et croisement</h4>
+      <p>
+        Un sujet n'est retenu pour analyse que s'il apparaît dans au moins deux sources sur les
+        trois. Cette règle évite de relayer les effets de mode et concentre l'attention sur les
+        tendances de fond.
+      </p>
+    </div>
+    <div class="step">
+      <div class="num">Étape 04</div>
+      <h4>Fiche de veille</h4>
+      <p>
+        Pour chaque sujet retenu, je rédige une fiche datée : source, contenu factuel, et
+        ce que ça m'apporte concrètement en tant que futur technicien SISR. Ces fiches forment
+        la trace écrite de ma veille.
+      </p>
+    </div>
+  </div>
 
-    <h3>Pourquoi ce sujet ?</h3>
+  <h3>Mon rythme de consultation</h3>
+  <p>
+    Plutôt que d'utiliser un agrégateur RSS, j'ai choisi de visiter chaque source directement.
+    Cela demande un peu plus de discipline, mais cela me permet de mieux connaître chaque
+    site et de repérer les éléments éditoriaux qu'un agrégateur fait disparaître (rubriquage,
+    mise en avant, contexte visuel).
+  </p>
+  <ul>
+    <li><strong>Le Monde Informatique</strong> — consultation quotidienne, surtout la rubrique cybersécurité, 10 à 15 minutes.</li>
+    <li><strong>CNIL</strong> — consultation hebdomadaire de la rubrique actualités et de la section IA.</li>
+    <li><strong>ANSSI / CERT-FR</strong> — consultation hebdomadaire des alertes et bulletins, plus mensuelle pour les rapports de fond.</li>
+  </ul>
+  <p>
+    Au total, ma veille me prend en moyenne <strong>15 à 20 minutes par jour</strong>. Les sujets
+    qui méritent une analyse approfondie sont notés dans un document de travail pour être
+    transformés en fiche de veille plus tard.
+  </p>
+</section>
+
+<!-- ========== 03 SOURCES ========== -->
+<section class="chapter" id="sources">
+  <div class="chapter-num">03 — Présentation des sources</div>
+  <h2>Trois sources, trois angles complémentaires</h2>
+
+  <p>
+    Chaque source est présentée ici avec sa fiche d'identité, une capture d'écran, et la raison
+    précise pour laquelle je l'ai retenue. Le travail d'analyse vient ensuite, quand je les fais
+    dialoguer entre elles.
+  </p>
+
+  <!-- SOURCE 1 ANSSI -->
+  <div class="source">
+    <div class="visual">
+      <img src="images/01_anssi.png" alt="Rapport ANSSI CERTFR-2026-CTI-001 sur cert.ssi.gouv.fr">
+    </div>
+    <div class="info">
+      <div class="source-name">ANSSI</div>
+      <span class="source-url"><a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener">cert.ssi.gouv.fr</a></span>
+      <div class="source-meta">
+        <div><div class="k">Nature</div><div class="v">Officielle / institutionnelle</div></div>
+        <div><div class="k">Fréquence</div><div class="v">Publications ponctuelles</div></div>
+        <div><div class="k">Langue</div><div class="v">Français</div></div>
+        <div><div class="k">Public</div><div class="v">Professionnels cyber</div></div>
+      </div>
+      <p>
+        L'Agence nationale de la sécurité des systèmes d'information est l'autorité française
+        en matière de cybersécurité. Ses publications (alertes, rapports, recommandations)
+        sont la <strong>référence pour évaluer une menace</strong> dans le contexte français.
+      </p>
+      <p>
+        Je l'ai retenue parce que c'est la seule source officielle qui produit des analyses
+        techniques détaillées sur l'IA générative côté défense ET côté attaquants.
+      </p>
+      <div class="limit">
+        <strong>Limite</strong>
+        Rythme de publication lent. Les rapports sont denses, écrits pour des spécialistes :
+        il faut souvent les lire deux fois pour en extraire les recommandations applicables.
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCE 2 CNIL -->
+  <div class="source">
+    <div class="visual">
+      <img src="images/02_cnil.png" alt="Page CNIL des recommandations finales du 22 juillet 2025 sur le développement des systèmes d'IA">
+    </div>
+    <div class="info">
+      <div class="source-name">CNIL</div>
+      <span class="source-url"><a href="https://www.cnil.fr/" target="_blank" rel="noopener">cnil.fr</a></span>
+      <div class="source-meta">
+        <div><div class="k">Nature</div><div class="v">Autorité indépendante</div></div>
+        <div><div class="k">Fréquence</div><div class="v">Publications régulières</div></div>
+        <div><div class="k">Langue</div><div class="v">Français</div></div>
+        <div><div class="k">Public</div><div class="v">DPO, juristes, DSI</div></div>
+      </div>
+      <p>
+        La Commission nationale de l'informatique et des libertés est l'autorité française
+        de protection des données. Sur l'IA, elle publie depuis 2023 des fiches pratiques
+        qui clarifient l'application du <strong>RGPD aux systèmes d'apprentissage automatique</strong>.
+      </p>
+      <p>
+        Je l'ai retenue parce qu'elle apporte le cadre juridique que l'ANSSI n'aborde pas.
+        Pour un futur SISR, comprendre ces obligations est essentiel : c'est nous qui les
+        mettons en œuvre techniquement.
+      </p>
+      <div class="limit">
+        <strong>Limite</strong>
+        Orientée conformité, parfois éloignée des contraintes d'exploitation. Il faut
+        traduire les exigences juridiques en mesures techniques concrètes.
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCE 3 LMI -->
+  <div class="source">
+    <div class="visual">
+      <img src="images/03_lmi.png" alt="Article du Monde Informatique sur l'IA générative en entreprise">
+    </div>
+    <div class="info">
+      <div class="source-name">Le Monde Informatique</div>
+      <span class="source-url"><a href="https://www.lemondeinformatique.fr/" target="_blank" rel="noopener">lemondeinformatique.fr</a></span>
+      <div class="source-meta">
+        <div><div class="k">Nature</div><div class="v">Presse professionnelle</div></div>
+        <div><div class="k">Fréquence</div><div class="v">Quotidienne</div></div>
+        <div><div class="k">Langue</div><div class="v">Français</div></div>
+        <div><div class="k">Public</div><div class="v">Professionnels IT</div></div>
+      </div>
+      <p>
+        Média de référence de l'IT professionnelle en France. Couvre quotidiennement
+        l'actualité cybersécurité, cloud, IA et transformation numérique avec un
+        <strong>angle entreprise et retours d'expérience</strong>.
+      </p>
+      <p>
+        Je l'ai retenu comme intermédiaire entre les rapports officiels (denses, lents)
+        et la veille quotidienne. Quand un sujet sort à l'ANSSI, c'est souvent LMI qui
+        le rend lisible et l'illustre avec des cas concrets.
+      </p>
+      <div class="limit">
+        <strong>Limite</strong>
+        Articles parfois courts qui n'épuisent pas le sujet. Sert de point d'entrée :
+        il faut ensuite remonter à la source primaire pour creuser.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 04 ANALYSE CROISÉE ========== -->
+<section class="chapter" id="analyse">
+  <div class="chapter-num">04 — Analyse croisée</div>
+  <h2>Quand les sources se parlent entre elles</h2>
+
+  <p>
+    C'est ici que la veille prend sa valeur. Lire une source seule, c'est de l'information.
+    Les faire dialoguer entre elles, c'est de l'analyse. Voici les trois grandes lectures
+    que je tire du croisement de mes trois sources.
+  </p>
+
+  <h3>4.1 — Cartographie de la menace</h3>
+  <p>
+    Comment les trois sources couvrent-elles les risques liés à l'IA générative en entreprise ?
+    Le tableau ci-dessous montre que <strong>chaque risque est abordé sous un angle différent</strong>
+    selon la source, ce qui permet d'en avoir une vision complète plutôt que partielle.
+  </p>
+
+  <div class="cross-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Risque</th>
+          <th>ANSSI</th>
+          <th>CNIL</th>
+          <th>Le Monde Informatique</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fuite de données</td>
+          <td>Recommande le cloisonnement strict du SI</td>
+          <td>Violation potentielle du RGPD si données personnelles</td>
+          <td>Cas concrets d'entreprises (Samsung 2023, etc.)</td>
+        </tr>
+        <tr>
+          <td>Prompt injection</td>
+          <td>Référencé comme vecteur d'attaque émergent</td>
+          <td>Hors champ direct</td>
+          <td>Vulgarise les démonstrations publiques</td>
+        </tr>
+        <tr>
+          <td>Shadow AI</td>
+          <td>Recommande une gouvernance claire des usages</td>
+          <td>Rappelle la responsabilité de l'employeur</td>
+          <td>Enquêtes sur la diffusion en entreprise</td>
+        </tr>
+        <tr>
+          <td>Empoisonnement de données</td>
+          <td>Identifié pour les modèles internes</td>
+          <td>Recommande filtres et journalisation</td>
+          <td>Couvre les cas marquants</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight">
+    <div class="tag">Ce que je retiens du croisement</div>
     <p>
-      Depuis 2022, des outils comme ChatGPT ou Copilot sont de plus en plus utilisés en entreprise.
-      Pendant mon alternance à la Caisse des Dépôts, j'ai vu qu'un outil interne (<strong>Archi+</strong>)
-      avait été mis en place pour utiliser l'IA sans envoyer de données à l'extérieur.
+      Les trois sources convergent sur un point : <em>le cloisonnement entre les systèmes
+      d'IA et le reste du SI n'est plus optionnel</em>. L'ANSSI le recommande techniquement,
+      la CNIL l'impose juridiquement, et Le Monde Informatique le documente sur le terrain
+      à travers des cas d'entreprises.
     </p>
+  </div>
 
-    <div class="arrow-callout">
-      <p>Comment profiter de l'IA sans prendre de risques ?</p>
-    </div>
-  </section>
+  <h3>4.2 — Cadre réglementaire : trois textes qui s'emboîtent</h3>
+  <p>
+    L'AI Act européen, les recommandations CNIL et les guides ANSSI ne sont pas des sujets
+    séparés : ils forment un <strong>système réglementaire cohérent</strong>. La CNIL applique
+    le RGPD au cas de l'IA, l'ANSSI traduit cela en mesures techniques, et l'AI Act vient
+    ajouter une couche spécifique aux usages à risque.
+  </p>
+  <ul>
+    <li><strong>RGPD (2018)</strong> — Base : protection des données personnelles, applicable à toute IA qui en traite.</li>
+    <li><strong>Recommandations CNIL (2023-2025)</strong> — Application du RGPD aux modèles d'apprentissage.</li>
+    <li><strong>AI Act (2024-2027)</strong> — Couche supplémentaire : interdictions, obligations selon le niveau de risque.</li>
+    <li><strong>Guides ANSSI</strong> — Mise en œuvre technique : cloisonnement, journalisation, contrôle d'accès.</li>
+  </ul>
+  <p>
+    Pour un futur technicien SISR, comprendre cet emboîtement est essentiel : c'est ce qui
+    permet d'expliquer à un utilisateur pourquoi telle pratique est interdite, et de proposer
+    une alternative conforme.
+  </p>
 
-  <!-- APPORTS ET RISQUES -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">02</div>
-      <h2>Apports & risques</h2>
-    </div>
+  <h3>4.3 — Trois rythmes éditoriaux qui se complètent</h3>
+  <p>
+    L'un des intérêts de croiser ces trois sources est d'avoir <strong>trois temporalités
+    différentes</strong> sur un même sujet, ce qui permet de suivre son évolution.
+  </p>
+  <ul>
+    <li>
+      <strong>Le Monde Informatique</strong> publie en premier, souvent à chaud, avec un
+      angle d'actualité. C'est ma source d'alerte.
+    </li>
+    <li>
+      <strong>La CNIL</strong> intervient ensuite, parfois après une consultation publique,
+      pour clarifier le cadre juridique applicable. C'est ma source de structuration.
+    </li>
+    <li>
+      <strong>L'ANSSI</strong> publie en dernier mais avec le plus de profondeur, sur la
+      base de plusieurs mois d'observation des menaces. C'est ma source de validation.
+    </li>
+  </ul>
+  <p>
+    Concrètement, sur le sujet de la prompt injection : LMI en parlait dès 2023 dans des
+    articles d'actualité, la CNIL l'a abordée dans ses recommandations de 2025, et l'ANSSI
+    l'a officialisée comme vecteur d'attaque dans son rapport de février 2026. Suivre les
+    trois en parallèle permet de comprendre comment un sujet passe du <em>signal</em> à
+    la <em>doctrine officielle</em>.
+  </p>
 
-    <h3>Ce que l'IA apporte</h3>
+  <div class="insight">
+    <div class="tag">Ce que la veille croisée m'apprend</div>
     <p>
-      L'IA peut vraiment aider au quotidien. Ces usages sont largement documentés dans la presse
-      spécialisée (Le Monde Informatique) et sur Hacker News, où les professionnels partagent leurs
-      retours concrets :
+      Une veille à <em>une seule vitesse</em> est une veille incomplète. La presse pro
+      donne l'actualité, l'autorité juridique donne le cadre, l'autorité cyber donne la
+      doctrine. C'est leur combinaison qui permet de comprendre vraiment un sujet plutôt
+      que d'en avoir une vue partielle.
     </p>
+  </div>
+</section>
 
-    <ul class="clean-list">
-      <li>Écrire du code plus rapidement</li>
-      <li>Comprendre des erreurs</li>
-      <li>Analyser des logs</li>
-      <li>Répondre à des demandes simples (support)</li>
-      <li>Retrouver des infos internes facilement</li>
-    </ul>
+<!-- ========== 05 ARCHI+ ========== -->
+<section class="chapter" id="archi">
+  <div class="chapter-num">05 — Application terrain</div>
+  <h2>Archi+ : l'outil interne d'IA générative de la Caisse des Dépôts</h2>
 
-    <div class="arrow-callout">
-      <p>Résultat : on gagne du temps et on est plus efficace.</p>
-    </div>
+  <p>
+    Pendant mon alternance, j'ai observé la mise en place d'<strong>Archi+</strong>,
+    l'outil interne d'IA générative déployé à la Caisse des Dépôts. Plutôt que de
+    décrire cet outil de manière isolée, je le présente ici comme <strong>la mise en œuvre
+    concrète des recommandations issues de ma veille</strong>.
+  </p>
 
-    <h3 style="margin-top:40px;">Les risques</h3>
-    <p>
-      Ces dangers ont été identifiés via les rapports officiels de l'ANSSI et de la CNIL,
-      complétés par la presse spécialisée et les flux Feedly sur la cybersécurité.
-    </p>
-
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Risque</th>
-            <th>Description</th>
-            <th>Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Fuite de données</strong></td>
-            <td>Envoyer des infos sensibles sans s'en rendre compte</td>
-            <td><span class="src-tag">ANSSI</span><span class="src-tag">CNIL</span></td>
-          </tr>
-          <tr>
-            <td><strong>Shadow AI</strong></td>
-            <td>Utiliser des outils non autorisés par la DSI</td>
-            <td><span class="src-tag">ANSSI</span><span class="src-tag">Le Monde Info</span></td>
-          </tr>
-          <tr>
-            <td><strong>Prompt injection</strong></td>
-            <td>Manipuler une IA pour lui faire exécuter des actions dangereuses</td>
-            <td><span class="src-tag">ANSSI</span><span class="src-tag">Hacker News</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ANALYSE -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">03</div>
-      <h2>Mon analyse</h2>
-    </div>
-
-    <p>On entend souvent deux discours opposés :</p>
-    <ul class="clean-list">
-      <li>soit l'IA est incroyable</li>
-      <li>soit c'est dangereux</li>
-    </ul>
-
-    <div class="arrow-callout">
-      <p>En réalité, c'est entre les deux.</p>
-    </div>
-
-    <p>
-      Ce que j'ai vu en entreprise, c'est qu'on peut utiliser l'IA de façon sécurisée, à condition de
-      <strong>garder le contrôle des données</strong> et <strong>d'encadrer les usages</strong>.
-    </p>
-
-    <p>
-      Les recommandations de l'ANSSI et de la CNIL vont exactement dans ce sens : ne pas interdire
-      l'IA, mais encadrer strictement son usage, surtout quand des données sensibles sont en jeu.
-    </p>
-
-    <div class="arrow-callout">
-      <p>Pour moi, le rôle d'un technicien SISR, c'est justement de trouver cet équilibre.</p>
-    </div>
-  </section>
-
-  <!-- APPLICATION ENTREPRISE - ARCHI+ -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">04</div>
-      <h2>Application en entreprise : Archi+</h2>
-    </div>
-
-    <p>
-      Pendant mon alternance à la Caisse des Dépôts, j'ai pu observer la mise en place d'un outil
-      interne d'IA générative baptisé <strong>Archi+</strong>. Cet outil illustre concrètement
-      comment une grande institution publique adapte les recommandations de l'ANSSI à son contexte.
-    </p>
-
+  <div class="archi-grid">
     <div class="archi-card">
-      <h3>Le besoin auquel Archi+ répond</h3>
+      <div class="num">Besoin métier</div>
+      <h4>Productivité sans exposition</h4>
       <p>
-        Les collaborateurs avaient besoin des bénéfices de l'IA générative (productivité, aide à la
-        rédaction, recherche d'informations internes) sans pouvoir utiliser des services externes
-        comme ChatGPT, qui auraient impliqué l'envoi de données sensibles vers des serveurs tiers.
+        Les collaborateurs voulaient les bénéfices de ChatGPT (aide à la rédaction,
+        recherche d'informations, assistance au code) sans envoyer de données sensibles
+        à des serveurs externes. Sans alternative interne, le risque de Shadow AI était certain.
       </p>
-
-      <h3 style="margin-top:20px;">Le principe de fonctionnement</h3>
-      <p>
-        Archi+ repose sur un modèle de langage hébergé en interne, dans un environnement cloisonné
-        du système d'information principal. Les requêtes des utilisateurs ne sortent pas du
-        périmètre de l'entreprise. C'est exactement le principe de <strong>cloisonnement</strong>
-        recommandé par l'ANSSI dans son rapport CERTFR-2026-CTI-001.
-      </p>
-
-      <h3 style="margin-top:20px;">Ce que cela m'a appris</h3>
-      <p>
-        Cette expérience m'a montré qu'il existe une voie médiane entre interdire l'IA (frustration
-        des utilisateurs et apparition du Shadow AI) et l'utiliser sans contrôle (fuites de données).
-        La solution passe par une infrastructure dédiée, un cadre clair sur les usages autorisés,
-        et un accompagnement des utilisateurs.
-      </p>
+      <div class="link-source">→ Risque identifié : ANSSI + LMI</div>
     </div>
-
-    <div class="arrow-callout">
-      <p>Archi+ est un cas concret qui valide la pertinence des recommandations officielles.</p>
-    </div>
-  </section>
-
-  <!-- SOURCES -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">05</div>
-      <h2>Analyse des sources</h2>
-    </div>
-
-    <!-- ANSSI -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">ANSSI</div>
-        <div class="source-url">cert.ssi.gouv.fr</div>
-      </div>
+    <div class="archi-card">
+      <div class="num">Principe</div>
+      <h4>Cloisonnement et hébergement interne</h4>
       <p>
-        Le 4 février 2026, l'ANSSI a publié son rapport officiel
-        <strong>« L'intelligence artificielle générative face aux attaques informatiques »</strong>
-        (référence CERTFR-2026-CTI-001). Ce document dresse un état des lieux de l'usage de l'IA
-        générative par les attaquants : ingénierie sociale, génération de code malveillant, création
-        de faux profils. Selon Google cité dans le rapport, le modèle Gemini a été détourné entre
-        2023 et 2024 par des opérateurs liés à au moins dix groupes iraniens, vingt chinois, neuf
-        nord-coréens et trois russes.
+        Archi+ repose sur un modèle de langage hébergé en interne, dans un environnement
+        séparé du système d'information principal. Les requêtes des utilisateurs ne sortent
+        pas du périmètre de l'entreprise.
       </p>
-      <p>
-        L'ANSSI recommande un cloisonnement strict entre les systèmes d'IA et le reste du SI, et
-        déconseille l'envoi de données sensibles vers des services en ligne comme ChatGPT ou Copilot.
-      </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        C'est la source la plus solide de ma veille. Document officiel, daté, accessible publiquement.
-        Le principe de cloisonnement qu'il défend correspond exactement à la démarche suivie à la
-        Caisse des Dépôts avec l'outil Archi+, conçu justement pour utiliser l'IA sans exposer les
-        données vers l'extérieur.
-      </div>
+      <div class="link-source">→ Recommandation directe : ANSSI CERTFR-2026-CTI-001</div>
     </div>
-
-    <!-- CNIL -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">CNIL</div>
-        <div class="source-url">cnil.fr</div>
-      </div>
+    <div class="archi-card">
+      <div class="num">Conformité</div>
+      <h4>RGPD by design</h4>
       <p>
-        La CNIL a publié le 22 juillet 2025 ses recommandations finales sur l'application du RGPD au
-        développement des systèmes d'IA. Le message central : dès qu'un modèle de langage peut
-        mémoriser des données personnelles, le RGPD s'applique. Envoyer un prompt contenant des
-        données clients à un service externe revient à les déposer sur un serveur tiers.
+        L'hébergement interne et le périmètre clos répondent au principe de minimisation
+        des données et limitent les transferts hors UE. C'est l'application pratique des
+        recommandations CNIL sur les modèles d'IA.
       </p>
+      <div class="link-source">→ Cadre juridique : CNIL juillet 2025</div>
+    </div>
+    <div class="archi-card">
+      <div class="num">Gouvernance</div>
+      <h4>Cadrage des usages</h4>
       <p>
-        La CNIL identifie les risques techniques spécifiques : empoisonnement des données
-        d'entraînement, extraction de données via le modèle (model inversion), injection de prompts
-        malveillants. Elle recommande chiffrement, contrôle d'accès et journalisation systématique.
+        Au-delà de l'outil technique, Archi+ s'accompagne d'une charte d'usage et d'un
+        accompagnement des utilisateurs. Sans cette gouvernance, le meilleur outil
+        technique reste insuffisant.
       </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        La CNIL apporte le cadre légal que l'ANSSI n'aborde pas. C'est complémentaire et
-        indispensable. Pour un futur technicien SISR, comprendre ces obligations fait partie du
-        métier : c'est souvent à la DSI de mettre en œuvre concrètement les exigences du DPO.
-      </div>
+      <div class="link-source">→ Approche identifiée comme nécessaire : sources croisées</div>
     </div>
+  </div>
 
-    <!-- LE MONDE INFORMATIQUE -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">Le Monde Informatique</div>
-        <div class="source-url">lemondeinformatique.fr</div>
-      </div>
-      <p>
-        Presse spécialisée française dédiée aux professionnels de l'IT. Les articles couvrent
-        l'actualité cybersécurité, cloud, IA et transformation numérique avec un angle entreprise.
-        C'est ma source principale pour suivre les annonces officielles, les retours d'expérience
-        terrain et les analyses de fond entre deux rapports institutionnels.
-      </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        Qualité éditoriale fiable, mise à jour quotidienne, ton adapté aux professionnels. C'est le
-        bon intermédiaire entre la source officielle (parfois aride) et la veille terrain. Un titre
-        qui m'a particulièrement aidé à comprendre l'impact concret du rapport ANSSI 2026.
-      </div>
-    </div>
-
-    <!-- HACKER NEWS -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">Hacker News</div>
-        <div class="source-url">news.ycombinator.com</div>
-      </div>
-      <p>
-        Hacker News est un agrégateur de liens techniques très suivi par les développeurs et les
-        professionnels de la sécurité au niveau international. Les sujets sur l'IA générative, les
-        nouvelles vulnérabilités et les débats sur l'éthique y sont régulièrement en tête de
-        classement.
-      </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        Bonne source pour détecter les tendances avant qu'elles n'arrivent dans la presse française.
-        Les commentaires sont souvent très techniques et permettent d'aller au fond des sujets.
-        Niveau d'exigence élevé, mais qualité au rendez-vous.
-      </div>
-    </div>
-
-    <!-- FEEDLY -->
-    <div class="source-card">
-      <div class="source-head">
-        <div class="source-name">Feedly — agrégateur RSS</div>
-        <div class="source-url">feedly.com</div>
-      </div>
-      <p>
-        Feedly est l'outil qui me permet de centraliser mes flux en un seul endroit : ANSSI, CNIL,
-        Le Monde Informatique, Hacker News. Cela évite de visiter chaque site manuellement et permet
-        de repérer rapidement les sujets qui reviennent souvent (signe que c'est important).
-      </p>
-      <div class="avis">
-        <strong>Mon avis</strong>
-        Ce n'est pas une source en soi, mais l'outil qui rend ma veille régulière possible. Le vrai
-        travail consiste à bien choisir les flux au départ et à filtrer ce qui mérite d'être lu en
-        profondeur.
-      </div>
-    </div>
-  </section>
-
-  <!-- FICHES D'ARTICLES -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">06</div>
-      <h2>Mes fiches de veille</h2>
-    </div>
-
-    <p style="margin-bottom:28px;">
-      Voici quelques articles ou publications que j'ai consultés pendant ma veille, datés et
-      analysés. Ces fiches matérialisent la régularité de ma démarche et permettent de retrouver
-      facilement les éléments importants.
+  <div class="insight">
+    <div class="tag">Ce que ce cas concret m'apprend</div>
+    <p>
+      Archi+ valide une thèse centrale de ma veille : il existe une voie médiane entre
+      <em>interdire l'IA</em> (qui provoque le Shadow AI) et <em>l'utiliser sans contrôle</em>
+      (qui provoque les fuites de données). Cette voie passe par une infrastructure dédiée,
+      un cadre clair et un accompagnement humain. C'est exactement ce que recommandent
+      mes quatre sources réunies.
     </p>
+  </div>
+</section>
 
-    <!-- FICHE 1 -->
-    <div class="fiche-card">
-      <div class="fiche-meta">
-        <span class="fiche-date">04 / 02 / 2026</span>
-        <span class="fiche-source">ANSSI · cert.ssi.gouv.fr</span>
-      </div>
-      <div class="fiche-title">L'intelligence artificielle générative face aux attaques informatiques (CERTFR-2026-CTI-001)</div>
-      <div class="fiche-resume">
+<!-- ========== 06 FICHES ========== -->
+<section class="chapter" id="fiches">
+  <div class="chapter-num">06 — Fiches de veille</div>
+  <h2>Chronologie des publications analysées</h2>
+
+  <p>
+    Chaque fiche présente une publication précise que j'ai consultée et analysée pendant
+    ma veille. La chronologie matérialise la régularité de la démarche sur près de deux ans.
+  </p>
+
+  <div class="fiche">
+    <div class="fiche-date">
+      <span class="d">04 / 02 / 2026</span>
+      <span class="s">ANSSI · cert.ssi.gouv.fr</span>
+    </div>
+    <div>
+      <div class="fiche-title"><a href="https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/" target="_blank" rel="noopener">L'intelligence artificielle générative face aux attaques informatiques (CERTFR-2026-CTI-001)</a></div>
+      <p>
         Premier rapport officiel français sur l'usage dual de l'IA générative dans le paysage cyber.
-        L'ANSSI confirme qu'aucune attaque autonome menée par IA n'a été observée contre des acteurs
-        français, mais que les groupes étatiques (Iran, Chine, Corée du Nord, Russie) intègrent
-        massivement ces outils dans leurs chaînes d'attaque.
-      </div>
-      <div class="fiche-retenu">
+        L'ANSSI confirme qu'aucune attaque entièrement autonome menée par IA n'a été observée
+        contre des acteurs français, mais que les groupes étatiques (Iran, Chine, Corée du Nord, Russie)
+        intègrent massivement ces outils dans leurs chaînes d'attaque.
+      </p>
+      <div class="retain">
         <strong>Ce que j'en retiens</strong>
-        Valide la pertinence d'outils internes type Archi+. Le cloisonnement entre système d'IA et
-        SI principal devient une recommandation officielle, pas un choix optionnel.
+        Valide la pertinence d'outils internes type Archi+. Le cloisonnement entre système d'IA
+        et SI principal devient une recommandation officielle, pas un choix optionnel.
       </div>
     </div>
+  </div>
 
-    <!-- FICHE 2 -->
-    <div class="fiche-card">
-      <div class="fiche-meta">
-        <span class="fiche-date">22 / 07 / 2025</span>
-        <span class="fiche-source">CNIL · cnil.fr</span>
-      </div>
-      <div class="fiche-title">Recommandations finales sur l'application du RGPD au développement des systèmes d'IA</div>
-      <div class="fiche-resume">
+  <div class="fiche">
+    <div class="fiche-date">
+      <span class="d">22 / 07 / 2025</span>
+      <span class="s">CNIL · cnil.fr</span>
+    </div>
+    <div>
+      <div class="fiche-title"><a href="https://www.cnil.fr/fr/ia-finalisation-recommandations-developpement-des-systemes-ia" target="_blank" rel="noopener">Recommandations finales sur l'application du RGPD aux systèmes d'IA</a></div>
+      <p>
         La CNIL publie son corpus de fiches pratiques après consultation publique. Elle clarifie
         quand le RGPD s'applique à un système d'IA et propose des solutions concrètes :
         anonymisation, filtres robustes, documentation des choix de conception (privacy by design).
-      </div>
-      <div class="fiche-retenu">
+      </p>
+      <div class="retain">
         <strong>Ce que j'en retiens</strong>
-        Le RGPD ne bloque pas l'innovation IA en Europe, contrairement à une idée reçue. Mais il
-        impose une démarche structurée que beaucoup d'entreprises sous-estiment.
+        Le RGPD ne bloque pas l'innovation IA en Europe, contrairement à une idée reçue.
+        Mais il impose une démarche structurée que beaucoup d'entreprises sous-estiment.
       </div>
     </div>
+  </div>
 
-    <!-- FICHE 3 -->
-    <div class="fiche-card">
-      <div class="fiche-meta">
-        <span class="fiche-date">FÉVRIER 2025</span>
-        <span class="fiche-source">UNION EUROPÉENNE</span>
-      </div>
-      <div class="fiche-title">Entrée en application progressive de l'AI Act européen</div>
-      <div class="fiche-resume">
+  <div class="fiche">
+    <div class="fiche-date">
+      <span class="d">02 / 02 / 2025</span>
+      <span class="s">Union européenne</span>
+    </div>
+    <div>
+      <div class="fiche-title"><a href="https://digital-strategy.ec.europa.eu/fr/policies/regulatory-framework-ai" target="_blank" rel="noopener">Entrée en application progressive de l'AI Act européen</a></div>
+      <p>
         Le règlement européen sur l'IA entre en vigueur. Certaines pratiques sont désormais
         interdites en Europe : scoring social, reconnaissance des émotions au travail ou à l'école,
         manipulation subliminale. Les obligations pour les systèmes à haut risque suivront entre
         2026 et 2027.
-      </div>
-      <div class="fiche-retenu">
+      </p>
+      <div class="retain">
         <strong>Ce que j'en retiens</strong>
-        Premier cadre réglementaire mondial dédié à l'IA. Va structurer la cybersécurité IA des
-        entreprises européennes pour les prochaines années.
+        Premier cadre réglementaire mondial dédié à l'IA. Va structurer la cybersécurité IA
+        des entreprises européennes pour les prochaines années.
       </div>
     </div>
+  </div>
 
-    <!-- FICHE 4 -->
-    <div class="fiche-card">
-      <div class="fiche-meta">
-        <span class="fiche-date">FÉVRIER 2026</span>
-        <span class="fiche-source">LE MONDE INFORMATIQUE</span>
-      </div>
+  <div class="fiche">
+    <div class="fiche-date">
+      <span class="d">Février 2026</span>
+      <span class="s">Le Monde Informatique</span>
+    </div>
+    <div>
       <div class="fiche-title">L'ANSSI livre son bilan de la menace IA en 2025</div>
-      <div class="fiche-resume">
+      <p>
         Article qui synthétise et vulgarise le rapport CERTFR-2026-CTI-001. Souligne notamment
         l'utilisation par les attaquants des protocoles MCP (Model Context Protocol) pour
         compromettre les agents IA, un risque émergent encore peu connu.
-      </div>
-      <div class="fiche-retenu">
+      </p>
+      <div class="retain">
         <strong>Ce que j'en retiens</strong>
         Les protocoles d'intégration des LLM (MCP) deviennent une nouvelle surface d'attaque.
         À surveiller de près à mesure que les agents IA se déploient en entreprise.
       </div>
     </div>
+  </div>
 
-    <!-- FICHE 5 -->
-    <div class="fiche-card">
-      <div class="fiche-meta">
-        <span class="fiche-date">MARS 2026</span>
-        <span class="fiche-source">CNIL × ANSSI</span>
-      </div>
+  <div class="fiche">
+    <div class="fiche-date">
+      <span class="d">Mars 2026</span>
+      <span class="s">CNIL × ANSSI</span>
+    </div>
+    <div>
       <div class="fiche-title">Projet PANAME : un outil d'audit RGPD pour les modèles d'IA</div>
-      <div class="fiche-resume">
+      <p>
         Initiative conjointe CNIL, ANSSI, Inria et PEReN pour développer un outil open source
         permettant de tester si un modèle d'IA est anonyme au sens du RGPD ou s'il fuite des
         données personnelles.
-      </div>
-      <div class="fiche-retenu">
+      </p>
+      <div class="retain">
         <strong>Ce que j'en retiens</strong>
         Convergence inédite entre régulateur des données et autorité cyber. Montre que les enjeux
         techniques et juridiques de l'IA ne peuvent plus être traités séparément.
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- AI ACT -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">07</div>
-      <h2>Sujet à suivre : l'AI Act européen</h2>
-    </div>
+<!-- ========== 07 AI ACT ========== -->
+<section class="chapter">
+  <div class="chapter-num">07 — Sujet à suivre</div>
+  <h2>L'AI Act européen : un calendrier qui va structurer le métier</h2>
 
-    <p>
-      Le règlement européen sur l'intelligence artificielle (AI Act) est le premier cadre
-      réglementaire mondial dédié à l'IA. Son entrée en application est progressive et va
-      transformer la manière dont les entreprises européennes peuvent déployer des systèmes
-      d'IA. C'est un sujet à suivre de près dans les prochains mois.
-    </p>
+  <p>
+    Le règlement européen sur l'intelligence artificielle est le premier cadre réglementaire
+    mondial dédié à l'IA. Son entrée en application progressive va transformer la manière
+    dont les entreprises européennes déploient des systèmes d'IA. C'est le sujet que je vais
+    continuer à suivre après le BTS.
+  </p>
 
-    <h3 style="margin-top:24px;">Calendrier de mise en application</h3>
-
-    <ul class="timeline">
-      <li>
-        <span class="date">Février 2025</span>
-        <span class="event">Entrée en vigueur des interdictions</span>
-        <p style="margin-top:6px; font-size:14px;">
+  <div class="timeline">
+    <div class="item">
+      <div class="when">2 février 2025</div>
+      <div class="what">
+        <h4>Entrée en vigueur des interdictions</h4>
+        <p>
           Scoring social, reconnaissance des émotions au travail ou à l'école, manipulation
-          subliminale, identification biométrique en temps réel sont désormais interdits en Europe.
+          subliminale, identification biométrique en temps réel : désormais interdits en Europe.
         </p>
-      </li>
-      <li>
-        <span class="date">Août 2025</span>
-        <span class="event">Obligations pour les modèles d'IA à usage général</span>
-        <p style="margin-top:6px; font-size:14px;">
-          Les fournisseurs de grands modèles (OpenAI, Anthropic, Mistral...) doivent publier
-          un résumé des données d'entraînement et respecter le droit d'auteur.
+      </div>
+    </div>
+    <div class="item">
+      <div class="when">2 août 2025</div>
+      <div class="what">
+        <h4>Obligations pour les modèles d'IA à usage général</h4>
+        <p>
+          Les fournisseurs de grands modèles (OpenAI, Anthropic, Mistral, etc.) doivent
+          publier un résumé des données d'entraînement et respecter le droit d'auteur.
         </p>
-      </li>
-      <li>
-        <span class="date">Août 2026</span>
-        <span class="event">Application aux systèmes d'IA à haut risque</span>
-        <p style="margin-top:6px; font-size:14px;">
+      </div>
+    </div>
+    <div class="item">
+      <div class="when">2 août 2026</div>
+      <div class="what">
+        <h4>Application aux systèmes d'IA à haut risque</h4>
+        <p>
           Les systèmes utilisés pour le tri de CV, le scoring de crédit ou le diagnostic médical
           devront respecter des exigences strictes : documentation, tests, supervision humaine.
         </p>
-      </li>
-      <li>
-        <span class="date">Août 2027</span>
-        <span class="event">Application complète</span>
-        <p style="margin-top:6px; font-size:14px;">
+      </div>
+    </div>
+    <div class="item">
+      <div class="when">2 août 2027</div>
+      <div class="what">
+        <h4>Application complète</h4>
+        <p>
           L'ensemble des dispositions du règlement devient applicable. La CNIL est désignée
           autorité de surveillance du marché en France.
         </p>
-      </li>
-    </ul>
-
-    <div class="arrow-callout">
-      <p>Pour une institution comme la CDC, l'articulation AI Act / RGPD sera un chantier majeur.</p>
-    </div>
-  </section>
-
-  <!-- TABLEAU RESUME -->
-  <section>
-    <div class="section-head">
-      <div class="section-num">08</div>
-      <h2>Synthèse de ma veille</h2>
-    </div>
-
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Source</th>
-            <th>Point fort</th>
-            <th>Limite</th>
-            <th>Usage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>ANSSI</strong></td>
-            <td>Référence officielle, données vérifiées</td>
-            <td>Très technique</td>
-            <td>Source principale risques SI</td>
-          </tr>
-          <tr>
-            <td><strong>CNIL</strong></td>
-            <td>Cadre juridique RGPD clair</td>
-            <td>Orienté conformité</td>
-            <td>Vérifier la légalité des usages</td>
-          </tr>
-          <tr>
-            <td><strong>Le Monde Informatique</strong></td>
-            <td>Actualité IT pro quotidienne</td>
-            <td>Articles parfois courts</td>
-            <td>Veille hebdomadaire</td>
-          </tr>
-          <tr>
-            <td><strong>Hacker News</strong></td>
-            <td>Tendances internationales</td>
-            <td>En anglais, très technique</td>
-            <td>Détection signaux émergents</td>
-          </tr>
-          <tr>
-            <td><strong>Feedly</strong></td>
-            <td>Centralise toutes les sources</td>
-            <td>Outil, pas une source</td>
-            <td>Veille quotidienne</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p style="margin-top:20px;">
-      Je consulte ces sources chaque semaine via Feedly, et je produis une synthèse régulière des
-      éléments importants pour mon métier.
-    </p>
-
-    <h3 style="margin-top:36px;">Ce que cette veille m'a apporté</h3>
-    <ul class="clean-list">
-      <li>Mieux comprendre les enjeux de sécurité liés à l'IA générative</li>
-      <li>Prendre du recul sur les annonces marketing autour des nouvelles technologies</li>
-      <li>Faire le lien entre théorie et pratique grâce à mon alternance</li>
-    </ul>
-  </section>
-
-  <!-- CONCLUSION -->
-  <section>
-    <div class="conclusion">
-      <div class="section-head">
-        <div class="section-num">09</div>
-        <h2>Conclusion</h2>
       </div>
-
-      <p class="pull">
-        L'IA générative va rester dans les entreprises. Le but n'est pas de l'éviter, mais de bien
-        l'utiliser.
-      </p>
-
-      <p>En tant que futur technicien SISR, je devrai :</p>
-      <ul class="clean-list">
-        <li>Sécuriser les usages</li>
-        <li>Accompagner les utilisateurs</li>
-        <li>Protéger les données</li>
-      </ul>
-
-      <p style="margin-top:20px;">
-        Ma veille continuera après le BTS, notamment sur l'AI Act et son application concrète,
-        ainsi que sur les nouveaux risques liés aux agents IA autonomes.
-      </p>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div>BTS SIO SISR · Veille technologique</div>
-    <div>Alternance · Caisse des Dépôts et Consignations · 2024–2025</div>
   </div>
 
-</div>
+  <p>
+    Pour une institution comme la Caisse des Dépôts, l'articulation AI Act / RGPD sera
+    un chantier majeur des prochaines années. C'est exactement le type de sujet où un
+    technicien SISR aura un rôle à jouer.
+  </p>
+</section>
+
+<!-- ========== 08 SYNTHÈSE ========== -->
+<section class="chapter">
+  <div class="chapter-num">08 — Synthèse personnelle</div>
+  <h2>Trois conclusions que je tire de ma veille</h2>
+
+  <div class="conclusions">
+    <div class="c">
+      <div class="num">01</div>
+      <h4>Sur la menace</h4>
+      <p>
+        L'IA générative n'est ni un gadget marketing, ni une menace existentielle. C'est une
+        technologie qui crée de nouvelles surfaces d'attaque (prompt injection, MCP, Shadow AI)
+        tout en outillant les défenseurs. La vraie question n'est plus « faut-il l'utiliser ? »
+        mais « comment l'encadrer techniquement ? »
+      </p>
+    </div>
+    <div class="c">
+      <div class="num">02</div>
+      <h4>Sur le cadre</h4>
+      <p>
+        RGPD, AI Act et recommandations ANSSI forment un système cohérent, pas une accumulation
+        de contraintes. Pour un futur SISR, comprendre cette articulation permet de transformer
+        des obligations apparentes en architecture de sécurité solide.
+      </p>
+    </div>
+    <div class="c">
+      <div class="num">03</div>
+      <h4>Sur le métier</h4>
+      <p>
+        Le rôle d'un technicien SISR sur ces sujets n'est pas d'interdire, mais de proposer.
+        Archi+ illustre ce que cela veut dire concrètement : construire une alternative qui
+        permet aux utilisateurs de profiter de l'IA sans exposer l'entreprise. C'est ce
+        positionnement que je veux occuper.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 09 CONCLUSION ========== -->
+<section class="chapter" style="border-bottom: none;">
+  <div class="chapter-num">09 — Conclusion</div>
+  <h2>Une veille qui continue</h2>
+
+  <p>
+    L'IA générative va rester dans les entreprises. Le but n'est pas de l'éviter, mais de
+    bien l'utiliser. Ma veille m'a permis de comprendre que <strong>la sécurité de l'IA n'est
+    pas une affaire d'outil, mais d'architecture, de gouvernance et de pédagogie</strong>.
+  </p>
+  <p>
+    En tant que futur technicien SISR, je devrai sécuriser les usages, accompagner les
+    utilisateurs, et protéger les données. Ma veille continuera après le BTS, notamment sur
+    l'AI Act et son application concrète, ainsi que sur les nouveaux risques liés aux
+    agents IA autonomes — un sujet qui n'en est qu'à ses débuts.
+  </p>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h3>Veille technologique</h3>
+      <div class="meta">BTS SIO · SISR · 2024–2026</div>
+    </div>
+    <div class="meta">
+      Alternance · Caisse des Dépôts et Consignations
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
